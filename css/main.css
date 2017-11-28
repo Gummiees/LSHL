@@ -9,39 +9,37 @@ body {
 	width: 100%;
 }
 
-.error, .ad {
-	font-weight: bold;
-	color: #C00
-}
-
 .navbar {
-    margin-bottom: 0;
-    background-color: #909;
-    z-index: 9999;
-    border: 0;
-    font-size: 12px !important;
-    line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    border-radius: 0;
+	padding-bottom: 0;
+  background-color: #8E44AD;
+  z-index: 9999;
+  border: 0;
+  font-size: 12px !important;
+  line-height: 1.42857143 !important;
+  letter-spacing: 4px;
+  border-radius: 0;
 }
 
-.navbar li a, .navbar .navbar-brand {
-    color: #fff !important;
+.navbar a, .navbar .navbar-brand {
+  color: #fff !important;
 }
 
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #909 !important;
-    background-color: #fff !important;
+.navbar-nav a:hover {
+	font-weight: bold;
 }
 
 .navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
+  border-color: transparent;
+  color: #fff !important;
 }
 
 .navbar-form {
 	margin: 0px !important;
 	padding: 0px !important;
+}
+
+.navbar-form .input-group {
+	margin-right: 10px;
 }
 
 .nav-logo {
@@ -51,14 +49,14 @@ body {
 
 .jumbotron {
 	margin-top: 50px;
-    background-color: #fff; /* Orange */
-    color: #909;
+  background-color: #fff;
+  color: #8E44AD;
 }
 
 footer .glyphicon {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: #909;
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #8E44AD;
 }
 
 .logo {
@@ -71,7 +69,8 @@ footer .glyphicon {
 }
 
 .product, .product .product-text, .product .product-img-div {
-	border: 1px #909 solid;
+	border: 1px #8E44AD solid;
+	border-radius: 5px;
 }
 
 .product, .username-title {
@@ -86,9 +85,11 @@ footer .glyphicon {
 }
 
 .username-title {
+	border-radius: 5px;
+	border: 1px solid #8E44AD;
 	height: 75px;
 	line-height: 75px;
-	background-color: #909;
+	background-color: #8E44AD;
 	color: white;
 	font-size: 2.5em;
 }
@@ -127,9 +128,7 @@ footer .glyphicon {
 .product .product-text .product-footer .product-seller a:hover,
 .product .product-text .product-footer .product-seller a:active
 {
-    font-style: italic;
-    color: black !important;
-    text-decoration: none;
+  font-style: italic;
 }
 
 .product .product-text .product-footer .product-price {
@@ -155,10 +154,6 @@ footer .glyphicon {
 	font-size: 1.5em !important;
 }
 
-.user-info img{
-    float:right;
-    width: 50%;
-}
 
 .user-info .username-profile{
 	font-weight: bold;
@@ -168,4 +163,26 @@ footer .glyphicon {
 .user-info  .desc-profile
 {
 	margin-top: 20px;
+}
+
+.user-info .img-profile img {
+	 width: 200px;
+	 height: relative;
+	 float: right;
+}
+
+.btn-primary {
+	background-color: #8E44AD !important;
+	border-color: #8E44AD !important;
+}
+
+.card-img-top {
+	display:block;
+  margin:auto;
+	width: 300px;
+	height: relative;
+}
+
+.oi-chevron-top {
+	color: #8E44AD;
 }
