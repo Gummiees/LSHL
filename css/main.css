@@ -28,6 +28,14 @@ body {
 	font-weight: bold;
 }
 
+.card a:link,
+.card a:visited,
+.card a:hover,
+.card a:active {
+	color: #8E44AD;
+	font-style: italic;
+}
+
 .navbar-default .navbar-toggle {
   border-color: transparent;
   color: #fff !important;
@@ -176,13 +184,45 @@ footer .glyphicon {
 	border-color: #8E44AD !important;
 }
 
+.cards-container {
+	margin-top: 20px;
+}
+
 .card-img-top {
 	display:block;
   margin:auto;
-	width: 300px;
-	height: relative;
+	width: auto;
+	max-width: 100%;
+	max-height: 300px;
 }
 
-.oi-chevron-top {
+.card a:hover {
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.card-price {
+	float: right;
+}
+
+.fa-chevron-up {
 	color: #8E44AD;
+}
+
+.footer-text {
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.footer-icon {
+	color: #adadad;
+	font-size: 2em;
+}
+
+.footer-icon:hover {
+	color: #000;
+	-webkit-transition: color 500ms ease-out;
+  -moz-transition: color 500ms ease-out;
+  -o-transition: color 500ms ease-out;
+  transition: color 500ms ease-out;
 }
