@@ -28,14 +28,6 @@ body {
 	font-weight: bold;
 }
 
-.card a:link,
-.card a:visited,
-.card a:hover,
-.card a:active {
-	color: #8E44AD;
-	font-style: italic;
-}
-
 .navbar-default .navbar-toggle {
   border-color: transparent;
   color: #fff !important;
@@ -136,7 +128,13 @@ footer .glyphicon {
 .product .product-text .product-footer .product-seller a:hover,
 .product .product-text .product-footer .product-seller a:active
 {
-  font-style: italic;
+	color: #8E44AD;
+	font-style: italic;
+}
+.product .product-text .product-footer .product-seller a:hover
+{
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .product .product-text .product-footer .product-price {
@@ -196,8 +194,31 @@ footer .glyphicon {
 	max-height: 300px;
 }
 
-.card a:hover {
+.card {
+	border: 1px solid #8E44AD;
+}
+
+.card .card-footer a:link,
+.card .card-footer a:visited,
+.card .card-footer a:hover,
+.card .card-footer a:active {
+	color: #8E44AD;
+	font-style: italic;
+}
+
+.card .card-footer a:hover {
 	font-weight: bold;
+	text-decoration: none;
+}
+
+.card .card-title a:link,
+.card .card-title a:visited,
+.card .card-title a:hover,
+.card .card-title a:active {
+	color: #000;
+}
+
+.card .card-title a:hover {
 	text-decoration: none;
 }
 
@@ -225,4 +246,16 @@ footer .glyphicon {
   -moz-transition: color 500ms ease-out;
   -o-transition: color 500ms ease-out;
   transition: color 500ms ease-out;
+}
+
+.carousel-item img {
+	display:block;
+  margin:auto;
+	width: auto;
+	max-width: 100%;
+	max-height: 300px;
+}
+
+.fa-plus-square {
+	font-size: 1.5em;
 }

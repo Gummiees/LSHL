@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
-    <title>Love Second Hand Life!</title>
+    <title>Love Second Hand Live!</title>
     <!--<script src="external/bootstrap-3.3.7/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="external/bootstrap-3.3.7/dist/css/bootstrap.min.css">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="external/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <script src="external/smooth-scroll.js"></script>
+    <!--<script src="external/smooth-scroll.js"></script>-->
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     <nav class="navbar navbar-expand-lg navbar-default bg-default fixed-top justify-content-between">
@@ -31,7 +31,7 @@
             <div class="input-group">
               <input type="text" class="form-control" placeholder="Search" name="q">
               <div class="input-group-btn">
-                  <button class="btn btn-default" type="submit"><span class="oi oi-magnifying-glass"></span></button>
+                  <button class="btn btn-default" type="submit"><span class="fa fa-search" aria-hidden="true"></span></button>
               </div>
             </div>
             <img src="images/nav.png" alt="Logo" class="nav-logo">
