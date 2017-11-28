@@ -1,11 +1,18 @@
 <?php
 include ('includes/header.php');
+if (isset($_GET['log'])) {
+	if ($_GET['log'] == 1) {
+		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged in.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+	} else {
+		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged out.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+	}
+}
 ?>
 <div class="row">
 	<div class="col-sm-1"></div>
 	<div class="jumbotron text-center col-sm-7">
-	  <h1>Love Second Hand Live!</h1> 
-	  <p>The best and biggest website to buy or sell figures online.</p>
+	  <h1 style="font-size: 4em;">Love Second Hand Live!</h1> 
+	  <p style="font-size: 1.5em;">The best and biggest website to buy or sell figures online.</p>
 	</div>
 	<div class="col-sm-4">
 	  <img src="images/logo.png" alt="Logo" class="logo">

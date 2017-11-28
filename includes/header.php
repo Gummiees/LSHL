@@ -23,9 +23,13 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="index.php">HOME</a>
-          <a class="nav-item nav-link" href="index.php?id=1">PROFILE</a>
-          <a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a>
-          <a class="nav-item nav-link" href="register_user.php">REGISTER USER</a>
+<?php 
+if (isset($_COOKIE['user_id'])) {
+  echo '<a class="nav-item nav-link" href="profile.php">PROFILE</a><a class="nav-item nav-link" href="logout.php">LOGOUT</a><a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a>';
+} else {
+  echo '<a class="nav-item nav-link" href="login.php">LOGIN</a><a class="nav-item nav-link" href="register_user.php">REGISTER USER</a>';
+}
+?>
         </div>
           <form class="navbar-form form-inline ml-auto" role="search">
             <div class="input-group">
