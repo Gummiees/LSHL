@@ -94,10 +94,8 @@ footer .glyphicon {
 	font-size: 2.5em;
 }
 
-.username-title span {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: normal;
+.username-title p {
+	text-align: center;
 }
 
 .product .product-text {
@@ -161,13 +159,12 @@ footer .glyphicon {
 }
 
 
-.user-info .username-profile{
+.user-info .username-profile {
 	font-weight: bold;
 	font-size: 1.5em;
 }
 
-.user-info  .desc-profile
-{
+.user-info  .desc-profile {
 	margin-top: 20px;
 }
 

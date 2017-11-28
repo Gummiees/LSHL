@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
     <link rel="stylesheet" href="external/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <!--<script src="external/smooth-scroll.js"></script>-->
+    <script src="external/smooth-scroll.js"></script>
   </head>
   <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
     <nav class="navbar navbar-expand-lg navbar-default bg-default fixed-top justify-content-between">
