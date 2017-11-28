@@ -51,6 +51,15 @@ INSERT INTO `figures` (`figure_id`, `user_id`, `name`, `description`, `price`, `
 (8, 10, 'Simpsons The Marge 2.75\" PVC Action Figure', 'Miniature Figurine\r\nUnique collector\'s item\r\nMade of durable PVC', 5.75, 'https://images-na.ssl-images-amazon.com/images/I/7103-rTigML._SY679_.jpg,http://www.16bit.com/toypics/simpsons/marge/01.gif', 1, '2017-11-28 00:00:00'),
 (15, 11, 'Okumura Rin', 'From:Ao no Exorcist\r\nCompany:Max Factory\r\nRelease Month:December 2012\r\nScale:1/8\r\nJP Retail Price:¥7600', 12, 'https://images.thefiguremall.com/figure/1560/7.jpg,https://images-na.ssl-images-amazon.com/images/I/41MbOsTcfdL._SL500_AC_SS350_.jpg,http://www.otakuhobbitoysph.com/wp-content/uploads/2017/01/GEMokumuraRin2.jpg', 1, '2017-11-28 19:30:54');
 
+
+/**/
+(1, '18cm Anime Death Note Figure Toy Deathnote Ryuuku', 'Material: PVC\nSize: About 18cm\nPackage: OPP Bag', 99.99, 'https://sc01.alicdn.com/kf/HTB1vyAOJVXXXXXmXpXXq6xXFXXXl.jpg', 1, NOW()),
+(1, '15CM Anime Figure Attack on Titan Figma Brinquedos 203 Mikasa Ackerman', 'Material: PVC\nSize: About 18cm\nPackage: OPP Bag', 79.99, 'http://i.ebayimg.com/images/i/111768828034-0-1/s-l1000.jpg', 1, NOW()),
+(1, 'Heroines Miku Hatsune Action Figure Anime Miku', 'Material: PVC\nSize: About 18cm\nPackage: OPP Bag', 19.99, 'https://images-na.ssl-images-amazon.com/images/I/41JubOONBhL._SL500_AC_SS350_.jpg', 1, NOW()),
+(2, 'Rem (PVC Figure)', 'anufacturer  : Good Smile Company\nScale : 1/7\nMaterial  : PVC , ABS\nProducer  : Yuko-n , Knead\nOriginal  : Re: Life in a Different World from Zero\nRelease Date  : Feb(Feb. 14, 2017 Pre-order start.)\nList Price  : 12,300yenabout110.26USD\nSales Price : 10,819yenabout96.99USD\nPoints Acquired : 324pointsOther Currencies\nJAN code  : 4580416940023\nItem code : 940023', 99.99, 'http://www.1999.co.jp/itbig44/10448761.jpg', 1, NOW()),
+(1, 'Tokyo Ghoul Ken Kaneki PVC 23 CM', 'Material: PVC\nSize: About 18cm\nPackage: OPP Bag', 9.99, 'https://li7.rightinthebox.com/images/240x240/201606/xfvh1466507031121.jpg', 1, NOW()),
+(1, 'Tenshi - Angel Beats!', 'From the anime Angle Beats! comes a 1/8th scale PVC figure of the angelic student council president, Tenshi. She is posed with her hands clasped together in front of her and a peaceful smile brimming over her face, which creates a very warm and relaxed atmosphere about her.', 199.99, 'http://images.goodsmile.info/cgm/images/product/20101221/3056/12454/large/540287fee2be076596bccc83a5cd5bcf.jpg', 1, NOW())
+/**/
 -- --------------------------------------------------------
 
 --

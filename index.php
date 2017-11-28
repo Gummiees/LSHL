@@ -58,7 +58,7 @@ if (isset($_GET['q'])) {
 		$cont = 0;
 		$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 		$images = explode(",", $row['images']);
-		echo '<div class="user-info"><div class="row"><div class="col-sm-3 img-profile"><img src="'.$row['profile_pic'].'" alt="'.$row['username'].' profile image" class="img-thumbnail"></div><div class="col-sm-9"><div class="row username-profile">'.$row['username'].'</div><div class="row desc-profile">'.$row['user_desc'].'</div><div class="row email-profile" style="margin-top: 20px;"><i>Email: '.$row['email'].'</i></div><div class="row tel-profile"><i>Telephone: '.$row['telephone'].'</i></div><div class="row desc-profile"><b>Selling '.$num.' figures!</b></div></div></div></div><div class="row username-title"><p><i>'.$row['username'].' </i> is selling</p></div>';
+		echo '<div class="user-info"><div class="row"><div class="col-sm-3 img-profile"><img src="'.$row['profile_pic'].'" alt="'.$row['username'].' profile image" class="img-thumbnail"></div><div class="col-sm-9"><div class="row username-profile">'.$row['username'].'</div><div class="row desc-profile">'.$row['user_desc'].'</div><div class="row email-profile" style="margin-top: 20px;"><i>Email: '.$row['email'].'</i></div><div class="row tel-profile"><i>Telephone: '.$row['telephone'].'</i></div><div class="row desc-profile"><b>Selling '.$num.' figures!</b></div></div></div></div><div class="row username-title"><div class="col-sm-12 text-center"><p><i>'.$row['username'].' </i> is selling</p></div></div>';
 		if (1 == $row['status']) {
 			$images = explode(",", $row['images']);
 			echo '<div class ="row product"><div class="product-img-div col-sm-4">';
