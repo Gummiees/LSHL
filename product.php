@@ -1,3 +1,0 @@
-<?php
-echo '<div class ="row product"><div class="product-img-div col-sm-4"><img src="'.$row['image'].'" alt="'.$row['name'].'" class="product-image"></div><div class="col-sm-8 product-text"><div class="row product-title">'.$row['name'].'</div><hr><div class="row product-desc text-justify">'.$row['description'].'</div><hr><div class="row product-footer"><div class="col-sm-6 text-left product-price">'.$row['price'].'€</div><div class="col-sm-6 text-right product-seller"><a href="index.php?id='.$row['user_id'].'">'.$row['username'].'</a></div></div></div></div>';
-?>
