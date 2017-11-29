@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
     $r = @mysqli_query ($dbc, $q);
     if ($r) {
-      echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. You can now sign in and register your figures to sell or buy some of them!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+      echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. We will review the register and post it as soon as posible.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
     } else {
       echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
         echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
