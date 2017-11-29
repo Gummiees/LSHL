@@ -10,8 +10,8 @@ if (isset($_GET['log'])) {
 }
 if (isset($_GET['stars'])) {
 	$stars = $_GET['stars'];
-	$bid = $_COOKIE['user_id'];
-	$sid = $_GET['id'];
+	$bid = $_COOKIE['username'];
+	$sid = $_GET['username'];
 	$s = $_GET['stars'];
 	if ($sid != $bid) {
 		$q = "SELECT star_id FROM stars WHERE (buyer_id='$bid' AND seller_id='$sid')";
@@ -35,7 +35,7 @@ if (isset($_GET['stars'])) {
 }
 
 include('includes/jumbotron.html');
-if (!isset($_GET['fid']) && !isset($_GET['id'])) {
+if (!isset($_GET['fid']) && !isset($_GET['username'])) {
 	include('includes/search_bar.php');
 }
 
@@ -59,7 +59,7 @@ if (isset($_GET['q'])) {
 			$order = 'F.price DESC';
 			break;
 	}
-	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.name LIKE '%$search%' OR U.username = '$search' ORDER BY $order";		
+	$q = "SELECT U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.name LIKE '%$search%' OR U.username = '$search' ORDER BY $order";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
@@ -79,7 +79,7 @@ if (isset($_GET['q'])) {
 	}
 } else if (isset($_GET['fid'])) {
 	$figure_id = $_GET['fid'];
-	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.figure_id = $figure_id ORDER BY F.published DESC";		
+	$q = "SELECT U.username, F.name, F.description, F.price, F.images, F.status FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.figure_id = $figure_id ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
@@ -89,10 +89,10 @@ if (isset($_GET['q'])) {
 		}
 		mysqli_free_result ($r);
 	}
-} else if (isset($_GET['id'])) {
-	$id = $_GET['id'];
+} else if (isset($_GET['username'])) {
+	$id = $_GET['username'];
 	include('includes/index_profile.php');
-	$q = "SELECT U.username, U.user_id, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.user_id=$id ORDER BY F.published DESC";		
+	$q = "SELECT F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.username='$id' ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
@@ -112,7 +112,7 @@ if (isset($_GET['q'])) {
 					else echo '<div class="carousel-item"><img class="d-block img-fluid" src="'.$img.'" alt="Second slide"></div>';
 				}
 				echo '</div><a class="carousel-control-prev" href="#carouselExampleIndicators'.$cont.'" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a><a class="carousel-control-next" href="#carouselExampleIndicators'.$cont.'" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a></div>';
-			echo '</div><div class="col-sm-8 product-text"><div class="row product-title">'.$row['name'].'</div><hr><div class="row product-desc text-justify">'.$row['description'].'</div><hr><div class="row product-footer"><div class="col-sm-6 text-left product-price">'.$row['price'].'€</div><div class="col-sm-6 text-right product-seller"><a href="index.php?id='.$row['user_id'].'">'.$row['username'].'</a></div></div></div></div>';
+			echo '</div><div class="col-sm-8 product-text"><div class="row product-title">'.$row['name'].'</div><hr><div class="row product-desc text-justify">'.$row['description'].'</div><hr><div class="row product-footer"><div class="col-sm-6 text-left product-price">'.$row['price'].'€</div><div class="col-sm-6 text-right product-seller"><a href="index.php?id='.$id.'">'.$id.'</a></div></div></div></div>';
 		}
 		$cont++;
 		while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
@@ -123,7 +123,7 @@ if (isset($_GET['q'])) {
 		 echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Your search featured no results.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	}
 }else {
-	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id
+	$q = "SELECT U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id
 	FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);

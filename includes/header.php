@@ -24,7 +24,7 @@
         <div class="navbar-nav mr-auto">
           <a class="nav-item nav-link" href="index.php">HOME</a>
 <?php 
-if (isset($_COOKIE['user_id'])) {
+if (isset($_COOKIE['username'])) {
   echo '<a class="nav-item nav-link" href="profile.php">PROFILE</a><a class="nav-item nav-link" href="logout.php">LOGOUT</a><a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a>';
 } else {
   echo '<a class="nav-item nav-link" href="login.php">LOGIN</a><a class="nav-item nav-link" href="register_user.php">REGISTER USER</a>';

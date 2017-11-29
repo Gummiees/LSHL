@@ -22,7 +22,7 @@ function check_login($dbc, $email = '', $pass = '') {
 	}
 
 	if (empty($errors)) {
-		$q = "SELECT user_id, username FROM users WHERE email='$e' AND pass=SHA1('$p')";		
+		$q = "SELECT username FROM users WHERE email='$e' AND pass=SHA1('$p')";		
 		$r = @mysqli_query ($dbc, $q);
 		if (mysqli_num_rows($r) == 1) {
 			$row = mysqli_fetch_array ($r, MYSQLI_ASSOC);

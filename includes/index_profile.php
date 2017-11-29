@@ -1,17 +1,17 @@
 <?php
-$q = "SELECT username, image FROM users WHERE user_id=$id";
+$q = "SELECT user_id, image FROM users WHERE username='$id'";
 $r = @mysqli_query ($dbc, $q);
 $num = mysqli_num_rows($r);
 $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+$uid = $row['user_id'];
 echo '<div class="user-info">
 	<div class="row">
 		<div class="col-sm-3 img-profile">
-			<img src="'.$row['image'].'" alt="'.$row['username'].' profile image" class="img-thumbnail">
+			<img src="'.$row['image'].'" alt="'.$id.' profile image" class="img-thumbnail">
 		</div>
 		<div class="col-sm-9">
-			<div class="row username-profile">'.$row['username'].'</div>';
-
-$q = "SELECT AVG(value) AS average, COUNT(value) AS total FROM stars WHERE seller_id=$id GROUP BY value";		
+			<div class="row username-profile">'.$id.'</div>';
+$q = "SELECT AVG(value) AS average, COUNT(value) AS total FROM stars WHERE seller_id=$uid GROUP BY value";		
 $r = @mysqli_query ($dbc, $q);
 $num = mysqli_num_rows($r);
 echo '<div class="row rate-profile" style="font-size: 1.5em;">';
@@ -19,7 +19,7 @@ if ($num == 1) {
 	//hay valoraciones
 	$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 	$avg = $row['average'];
-	if (isset($_COOKIE['user_id'])) {
+	if (isset($_COOKIE['username'])) {
 		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
@@ -177,7 +177,7 @@ if ($num == 1) {
 	echo '</script></div>
 	<div class="row"><small>'.$row['average'].' average based on '.$row['total'].' votes.</small></div>';
 } else {
-	if (isset($_COOKIE['user_id'])) {
+	if (isset($_COOKIE['username'])) {
 		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
@@ -193,7 +193,7 @@ if ($num == 1) {
 	echo '</script></div><div class="row"><small>No votes yet.</small></div>';
 }
 
-$q = "SELECT username, description, telephone, email FROM users WHERE user_id=$id";
+$q = "SELECT description, telephone, email FROM users WHERE username='$id'";
 $r = @mysqli_query ($dbc, $q);
 $num = mysqli_num_rows($r);
 $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
@@ -212,7 +212,7 @@ echo '<div class="row desc-profile">'.$row['description'].'</div>
 </div>
 	<div class="row username-title">
 		<div class="col-sm-12 text-center">
-			<p><i>'.$row['username'].' </i> is selling</p>
+			<p><i>'.$id.' </i> is selling</p>
 		</div>
 	</div>';
 ?>

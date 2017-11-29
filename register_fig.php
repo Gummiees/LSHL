@@ -51,7 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   if (empty($errors)) {
-    $id = $_COOKIE['user_id'];
+    $uid = $_COOKIE['username'];
+    $q = "SELECT user_id FROM users WHERE username='$uid'";
+    $r = @mysqli_query($dbc, $q);
+    $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+    $id = $row['user_id'];
     $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
     $r = @mysqli_query ($dbc, $q);
     if ($r) {
