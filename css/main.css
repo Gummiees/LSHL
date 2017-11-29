@@ -208,6 +208,18 @@ footer .glyphicon {
 	text-decoration: none;
 }
 
+.rate-profile a:link,
+.rate-profile a:visited,
+.rate-profile a:hover,
+.rate-profile a:active {
+	color: #8E44AD;
+}
+
+.rate-profile a:hover {
+	font-weight: bold;
+	text-decoration: none;
+}
+
 .card .card-title a:link,
 .card .card-title a:visited,
 .card .card-title a:hover,

@@ -1,10 +1,36 @@
 <?php
 include ('includes/header.php');
+require ('mysqli_connect.php');
 if (isset($_GET['log'])) {
 	if ($_GET['log'] == 1) {
 		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged in.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	} else {
 		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged out.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+	}
+}
+if (isset($_GET['stars'])) {
+	$stars = $_GET['stars'];
+	$bid = $_COOKIE['user_id'];
+	$sid = $_GET['id'];
+	$s = $_GET['stars'];
+	if ($sid != $bid) {
+		$q = "SELECT star_id FROM stars WHERE (buyer_id='$bid' AND seller_id='$sid')";
+    $r = @mysqli_query($dbc, $q);
+    $num = @mysqli_num_rows($r);
+    if ($num === 0) {
+			$q = "INSERT INTO stars (buyer_id, seller_id, value) VALUES ('$bid', '$sid', '$s')";
+			$r = @mysqli_query ($dbc, $q);
+		  if ($r) {
+		    echo "<div class='alert alert-success alert-dismissible show' role='alert'>Your rate has been successfully send.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		  } else {
+		    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		      echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+		  }
+		} else {
+	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot vote twice the same seller.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		}
+	} else {
+	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot rate yourself.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	}
 }
 ?>
@@ -20,7 +46,6 @@ if (isset($_GET['log'])) {
 </div>
 
 <?php
-require ('mysqli_connect.php');
 if (isset($_GET['q'])) {
 	$search = $_GET['q'];
 	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.name LIKE '%$search%' OR U.username = '$search' ORDER BY F.published DESC";		
@@ -51,14 +76,14 @@ if (isset($_GET['q'])) {
 	}
 } else if (isset($_GET['id'])) {
 	$id = $_GET['id'];
-	$q = "SELECT U.user_id, U.username, U.description AS user_desc, U.image AS profile_pic, U.telephone, U.email, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.user_id=$id ORDER BY F.published DESC";		
+	include('includes/index_profile.php');
+	$q = "SELECT U.user_id, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.user_id=$id ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
 		$cont = 0;
 		$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 		$images = explode(",", $row['images']);
-		echo '<div class="user-info"><div class="row"><div class="col-sm-3 img-profile"><img src="'.$row['profile_pic'].'" alt="'.$row['username'].' profile image" class="img-thumbnail"></div><div class="col-sm-9"><div class="row username-profile">'.$row['username'].'</div><div class="row desc-profile">'.$row['user_desc'].'</div><div class="row email-profile" style="margin-top: 20px;"><i>Email: '.$row['email'].'</i></div><div class="row tel-profile"><i>Telephone: '.$row['telephone'].'</i></div><div class="row desc-profile"><b>Selling '.$num.' figures!</b></div></div></div></div><div class="row username-title"><div class="col-sm-12 text-center"><p><i>'.$row['username'].' </i> is selling</p></div></div>';
 		if (1 == $row['status']) {
 			$images = explode(",", $row['images']);
 			echo '<div class ="row product"><div class="product-img-div col-sm-4">';
@@ -100,6 +125,8 @@ if (isset($_GET['q'])) {
 		 echo "<div class='alert alert-danger alert-dismissible show' role='alert'>There are currently no registered figures.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	}
 }
+
+mysqli_close($dbc);	
 ?>
 <?php
 include ('includes/footer.html');

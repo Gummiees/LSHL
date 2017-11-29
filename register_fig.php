@@ -4,16 +4,6 @@ include ('includes/header.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require ('mysqli_connect.php');
   $errors = array();
-  if (empty($_POST['email'])) {
-    $errors[] = 'You forgot to enter your email.';
-  } else {
-    $email = mysqli_real_escape_string($dbc, trim($_POST['email']));
-  }
-  if (empty($_POST['pwd'])) {
-    $errors[] = 'You forgot to enter your password.';
-  } else {
-    $pw = mysqli_real_escape_string($dbc, trim($_POST['pwd']));
-  }
   if (empty($_POST['name'])) {
     $errors[] = 'You forgot to enter the figure name.';
   } else {
@@ -61,25 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 
   if (empty($errors)) {
-    $q = "SELECT user_id FROM users WHERE (email='$email' AND pass='$pw')";
-    $r = @mysqli_query($dbc, $q);
-    $num = @mysqli_num_rows($r);
-    if ($num == 1) {
-      $row = mysqli_fetch_array($r, MYSQLI_NUM);
-      $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$row[0]', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
-      $r = @mysqli_query ($dbc, $q);
-      if ($r) {
-        echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. You can now sign in and register your figures to sell or buy some of them!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-      } else {
-        echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-          echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
-      }
-      mysqli_close($dbc);
-      include ('includes/footer.html'); 
-      exit();
+    $id = $_COOKIE['user_id'];
+    $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
+    $r = @mysqli_query ($dbc, $q);
+    if ($r) {
+      echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. You can now sign in and register your figures to sell or buy some of them!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
     } else {
-      echo "<div class='alert alert-danger alert-dismissible show' role='alert'>The email and/or password introduced were incorrect.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
+      echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
     }
+    mysqli_close($dbc);
+    include ('includes/footer.html'); 
+    exit();
   } else {
     foreach ($errors as $msg) {
       echo "<div class='alert alert-danger alert-dismissible show' role='alert'>$msg<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
@@ -94,26 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
     <form class="form-horizontal" action="register_fig.php" method="post">
-      <div class="row">
-        <div class="col-sm-2 text-right" style="font-size: 1.5em;"><b>User info</b></div>
-      </div>
-      <div class="form-group row">
-        <label class="control-label col-sm-2 text-right" for="email">Email:</label>
-        <div class="col-sm-10">
-          <input type="email" class="form-control" name="email" id="email" placeholder="Email" required minlength="5" maxlength="60" value="<?php if (isset($_POST['email'])) echo $_POST['email']; ?>">
-          <small class="form-text text-muted">Required.</small>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="control-label col-sm-2 text-right" for="pwd">Password:</label>
-        <div class="col-sm-10"> 
-          <input type="password" class="form-control" minlength="3" name="pwd" id="pwd" required placeholder="Password">
-          <small class="form-text text-muted">Required.</small>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-2 text-right" style="font-size: 1.5em;"><b>Figure info</b></div>
-      </div>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="name">Name:</label>
         <div class="col-sm-10"> 
