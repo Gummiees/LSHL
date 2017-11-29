@@ -40,14 +40,14 @@ if (isset($_COOKIE['user_id'])) {
             </div>
             <img src="images/nav.png" alt="Logo" class="nav-logo">
           </form>
-<?php
+<!--<?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (!empty($_POST['q'])) {
     $q = mysqli_real_escape_string($dbc, trim($_POST['q']));
     header("edit_user.php?id=$q");
   }
 }
-?>
+?>-->
       </div>
     </nav>
     <div class="content" id="topPage">

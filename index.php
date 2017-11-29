@@ -33,27 +33,40 @@ if (isset($_GET['stars'])) {
 	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot rate yourself.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	}
 }
-?>
-<div class="row">
-	<div class="col-sm-1"></div>
-	<div class="jumbotron text-center col-sm-7">
-	  <h1 style="font-size: 4em;">Love Second Hand Live!</h1> 
-	  <p style="font-size: 1.5em;">The best and biggest website to buy or sell figures online.</p>
-	</div>
-	<div class="col-sm-4">
-	  <img src="images/logo.png" alt="Logo" class="logo">
-	</div>
-</div>
 
-<?php
+include('includes/jumbotron.html');
+include('includes/search_bar.php');
+
 if (isset($_GET['q'])) {
 	$search = $_GET['q'];
-	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.name LIKE '%$search%' OR U.username = '$search' ORDER BY F.published DESC";		
+	switch($_GET['s']) {
+		case 'new':
+			$order_p = 'newest published';
+			$order = 'F.published DESC';
+			break;
+		case 'old':
+			$order_p = 'oldest published';
+			$order = 'F.published ASC';
+			break;
+		case 'low':
+			$order_p = 'lowest price';
+			$order = 'F.price ASC';
+			break;
+		case 'high':
+			$order_p = 'highest price';
+			$order = 'F.price DESC';
+			break;
+	}
+	$q = "SELECT U.user_id, U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE F.name LIKE '%$search%' OR U.username = '$search' ORDER BY $order";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
 		$cont = 4;
-		echo "<div class='row username-title'><p>Results for your search '".$_GET['q']."':</p></div>";
+		echo "<div class='row search-title'>
+			<div class='col-sm-12 text-center'>
+				<p>Results for your search '".$_GET['q']."' ordered by $order_p:</p>
+			</div>
+		</div>";
 		echo '<div class="row"><div class="col-sm-1"></div><div class="col-sm-10 cards-container">';
 		while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
 			include ('includes/show_card.php');
@@ -77,13 +90,12 @@ if (isset($_GET['q'])) {
 } else if (isset($_GET['id'])) {
 	$id = $_GET['id'];
 	include('includes/index_profile.php');
-	$q = "SELECT U.user_id, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.user_id=$id ORDER BY F.published DESC";		
+	$q = "SELECT U.username, U.user_id, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.user_id=$id ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
 	$num = mysqli_num_rows($r);
 	if ($num > 0) {
 		$cont = 0;
 		$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
-		$images = explode(",", $row['images']);
 		if (1 == $row['status']) {
 			$images = explode(",", $row['images']);
 			echo '<div class ="row product"><div class="product-img-div col-sm-4">';

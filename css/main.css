@@ -73,7 +73,7 @@ footer .glyphicon {
 	border-radius: 5px;
 }
 
-.product, .username-title {
+.product, .username-title, .search-bar, .search-title {
 	margin-top: 10px;
 	margin-left: 10%;
 	margin-right: 10%;
@@ -84,14 +84,21 @@ footer .glyphicon {
 	height: 300px;
 }
 
-.username-title {
+.username-title, .search-bar, .search-title {
 	border-radius: 5px;
 	border: 1px solid #8E44AD;
 	height: 75px;
 	line-height: 75px;
 	background-color: #8E44AD;
 	color: white;
+}
+
+.username-title, .search-bar {
 	font-size: 2.5em;
+}
+
+.search-title {
+	font-size: 2em;
 }
 
 .username-title p {
@@ -267,4 +274,13 @@ footer .glyphicon {
 
 .fa-plus-square {
 	font-size: 1.5em;
+}
+
+.horizontal-center {
+	margin: auto;
+	display: inline-block;
+}
+
+.search-bar select {
+  font-family: 'FontAwesome', 'Roboto', sans-serif;
 }

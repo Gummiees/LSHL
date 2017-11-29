@@ -183,7 +183,7 @@ if ($num == 1) {
 			<a class="fa fa-star" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
 			<a class="fa fa-star-half-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=4"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=5">';
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=5"></a>';
 	} else {
 		echo '<i class="fa fa-star" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0"></i>
 			<i class="fa fa-star" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true"></i>
@@ -227,6 +227,7 @@ echo '<div class="row desc-profile">'.$row['description'].'</div>
 		for (var i=0; i < 5; i++) {
 			if (i <= x.id) {
 				document.getElementById(''+i+'').classList.remove('fa-star-o');
+				document.getElementById(''+i+'').classList.remove('fa-star-half-o');
 				document.getElementById(''+i+'').classList.add('fa-star');
 			}
 		}
