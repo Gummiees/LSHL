@@ -174,24 +174,23 @@ if ($num == 1) {
 		document.getElementById(''+4+'').classList.add('fa-star');";
 		}
 	}
-	echo '</script>
-	<small style="margin-left: 10px;">('.$row['average'].')</small></div>
-	<div class="row"><small>'.$row['total'].' votes</small></div>';
+	echo '</script></div>
+	<div class="row"><small>'.$row['average'].' average based on '.$row['total'].' votes.</small></div>';
 } else {
 	if (isset($_COOKIE['user_id'])) {
-		echo '<a class="fa fa-star" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
-			<a class="fa fa-star" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
-			<a class="fa fa-star-half-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
+		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=4"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=5"></a>';
 	} else {
-		echo '<i class="fa fa-star" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0"></i>
-			<i class="fa fa-star" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true"></i>
-			<i class="fa fa-star-half-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true"></i>
+		echo '<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0"></i>
+			<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true"></i>
+			<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true"></i>
 			<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true"></i>
 			<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true"></i>';
 	}
-	echo '</script></div><div class="row"><small>0 votes</small></div>';
+	echo '</script></div><div class="row"><small>No votes yet.</small></div>';
 }
 
 $q = "SELECT username, description, telephone, email FROM users WHERE user_id=$id";

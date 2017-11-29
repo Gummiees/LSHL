@@ -35,7 +35,9 @@ if (isset($_GET['stars'])) {
 }
 
 include('includes/jumbotron.html');
-include('includes/search_bar.php');
+if (!isset($_GET['fid']) && !isset($_GET['id'])) {
+	include('includes/search_bar.php');
+}
 
 if (isset($_GET['q'])) {
 	$search = $_GET['q'];
