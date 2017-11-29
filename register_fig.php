@@ -70,6 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 ?>
+<div class="row text-center login-title">
+  <div class="col-sm-12 text-center">
+    <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Register figure</h1>
+  </div>
+</div>
 <script>
   var i=0;
 </script>

@@ -29,7 +29,8 @@ if (isset($errors) && !empty($errors)) {
           <small class="form-text text-muted">Required.</small>
         </div>
       </div>
-      <div class="form-group row"> 
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
         <div class="col-sm-offset-2 col-sm-10">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>

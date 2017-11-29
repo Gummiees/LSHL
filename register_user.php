@@ -88,12 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
  
   if (empty($errors)) {
-    $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$usr'";
+    $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$usr' OR email='$email'";
     $r = @mysqli_query ($dbc, $q);
     $num = mysqli_num_rows($r);
     $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
     if ($row['total'] > 0) {
-        echo "<div class='alert alert-danger alert-dismissible show' role='alert'>The username is already taken.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
+        echo "<div class='alert alert-danger alert-dismissible show' role='alert'>The username and/or email are/is already taken.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
     } else {
       if ($d == '') {
         if ($img == '') {
@@ -127,13 +127,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 }
 ?>
+<div class="row text-center login-title">
+  <div class="col-sm-12 text-center">
+    <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Register</h1>
+  </div>
+</div>
 <div class="row">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
     <form class="form-horizontal" action="register_user.php" method="post">
-      <div class="row">
-        <div class="col-sm-2 text-right" style="font-size: 1.5em;"><b>User info</b></div>
-      </div>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="username">Username:</label>
         <div class="col-sm-10"> 
