@@ -14,20 +14,38 @@ if (isset($_GET['stars'])) {
 	$sid = $_GET['username'];
 	$s = $_GET['stars'];
 	if ($sid != $bid) {
-		$q = "SELECT star_id FROM stars WHERE (buyer_id='$bid' AND seller_id='$sid')";
+		$q = "SELECT user_id FROM users WHERE username='$bid'";
     $r = @mysqli_query($dbc, $q);
     $num = @mysqli_num_rows($r);
-    if ($num === 0) {
-			$q = "INSERT INTO stars (buyer_id, seller_id, value) VALUES ('$bid', '$sid', '$s')";
-			$r = @mysqli_query ($dbc, $q);
-		  if ($r) {
-		    echo "<div class='alert alert-success alert-dismissible show' role='alert'>Your rate has been successfully send.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-		  } else {
-		    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-		      echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
-		  }
+    if ($num == 1) {
+			$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+			$bid = $row['user_id'];
+			$q = "SELECT user_id FROM users WHERE username='$sid'";
+	    $r = @mysqli_query($dbc, $q);
+	    $num = @mysqli_num_rows($r);
+    	if ($num == 1) {
+				$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+				$sid = $row['user_id'];
+				$q = "SELECT star_id FROM stars WHERE (buyer_id='$bid' AND seller_id='$sid')";
+		    $r = @mysqli_query($dbc, $q);
+		    $num = @mysqli_num_rows($r);
+		    if ($num === 0) {
+					$q = "INSERT INTO stars (buyer_id, seller_id, value) VALUES ('$bid', '$sid', '$s')";
+					$r = @mysqli_query ($dbc, $q);
+				  if ($r) {
+				    echo "<div class='alert alert-success alert-dismissible show' role='alert'>Your rate has been successfully send.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+				  } else {
+				    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+				      echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+				  }
+	    	} else {
+		    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot vote twice the same seller.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+				}
+    	} else {
+	    	echo "<div class='alert alert-danger alert-dismissible show' role='alert'>The buyer username was not found.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+    	}			
 		} else {
-	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot vote twice the same seller.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Your username was not found.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		}
 	} else {
 	    echo "<div class='alert alert-danger alert-dismissible show' role='alert'>You cannot rate yourself.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";

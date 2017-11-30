@@ -11,7 +11,7 @@ echo '<div class="user-info">
 		</div>
 		<div class="col-sm-9">
 			<div class="row username-profile">'.$id.'</div>';
-$q = "SELECT AVG(value) AS average, COUNT(value) AS total FROM stars WHERE seller_id=$uid GROUP BY value";		
+$q = "SELECT seller_id, AVG(value) AS average, COUNT(value) AS total FROM stars WHERE seller_id=$uid GROUP BY seller_id";		
 $r = @mysqli_query ($dbc, $q);
 $num = mysqli_num_rows($r);
 echo '<div class="row rate-profile" style="font-size: 1.5em;">';
@@ -20,11 +20,11 @@ if ($num == 1) {
 	$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 	$avg = $row['average'];
 	if (isset($_COOKIE['username'])) {
-		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=4"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=5"></a><script>';
+		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=1"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=2"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=3"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=4"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=5"></a><script>';
 		if ($avg <= 0.5) {
 			echo "document.getElementById(''+0+'').classList.remove('fa-star-o');
 		document.getElementById(''+0+'').classList.add('fa-star-half-o');";
@@ -178,11 +178,11 @@ if ($num == 1) {
 	<div class="row"><small>'.$row['average'].' average based on '.$row['total'].' votes.</small></div>';
 } else {
 	if (isset($_COOKIE['username'])) {
-		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=1"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=2"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=3"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=4"></a>
-			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?id='.$id.'&stars=5"></a>';
+		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=1"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=2"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=3"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="3" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=4"></a>
+			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="4" aria-hidden="true" onmouseover="fill(this)" href="index.php?username='.$id.'&stars=5"></a>';
 	} else {
 		echo '<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0"></i>
 			<i class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true"></i>
