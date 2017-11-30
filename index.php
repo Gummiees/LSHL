@@ -2,9 +2,9 @@
 include ('includes/header.php');
 require ('mysqli_connect.php');
 if (isset($_GET['log'])) {
-	if ($_GET['log'] == 1) {
+	if ($_GET['log'] == 1 && isset($_COOKIE['username'])) {
 		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged in.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-	} else {
+	} else if ($_GET['log'] == 2  && !isset($_COOKIE['username'])){
 		echo "<div class='alert alert-success alert-dismissible show' role='alert'>Successfully logged out.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 	}
 }
