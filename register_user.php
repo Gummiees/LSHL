@@ -1,5 +1,6 @@
 <?php
 include ('includes/header.php');
+include('includes/print_messages.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require ('mysqli_connect.php');
@@ -64,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
   if (!empty($_POST['desc'])) {
-    if (empty($_POST['desc']) <= 500) {
+    if ($_POST['desc'] <= 500) {
       $d = mysqli_real_escape_string($dbc, trim($_POST['desc']));
     } else {
       $errors[] = 'The description is too long.';
@@ -93,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $num = mysqli_num_rows($r);
     $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
     if ($row['total'] > 0) {
-        echo "<div class='alert alert-danger alert-dismissible show' role='alert'>The username and/or email are/is already taken.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
+      echo print_message('danger', 'The username and/or email are/is already taken.');
     } else {
       if ($d == '') {
         if ($img == '') {
@@ -110,11 +111,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       }  
       $r = @mysqli_query ($dbc, $q);
       if ($r) {
-        echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. You can now sign in and register your figures to sell or buy some of them!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+        echo print_message('success', 'Thank you. You can now sign in and register your figures to sell or buy some of them!');
       } else {
-        echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
-              
+        echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
+        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>'; 
       }
       mysqli_close($dbc);
       include ('includes/footer.html'); 
@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   } else {
     foreach ($errors as $msg) {
-      echo "<div class='alert alert-danger alert-dismissible show' role='alert'>$msg<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
+      echo print_message('danger', $msg);
     }
   }
 }
@@ -181,26 +181,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="image">Profile Image link:</label>
         <div class="col-sm-10"> 
-          <input type="url" class="form-control" name="image" id="image" placeholder="Enter the image url (max 250 characters)" maxlength="250" minlength="5" value="<?php if (isset($_POST['image'])) echo $_POST['image']; ?>">
+          <input type="url" class="form-control" name="image" id="image" placeholder="Image url" maxlength="250" minlength="5" value="<?php if (isset($_POST['image'])) echo $_POST['image']; ?>">
           <small class="form-text text-muted">This will be your profile image. It must be a link (url) containing less than 250 characters.</small>
         </div>
       </div>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="pwd1">Password:</label>
         <div class="col-sm-10"> 
-          <input type="password" class="form-control" minlength="5" name="pwd1" id="pwd1" required placeholder="Enter password (min 5 characters)">
+          <input type="password" class="form-control" minlength="5" name="pwd1" id="pwd1" required placeholder="Password">
           <small class="form-text text-muted">Required. Minimum 5 characters.</small>
         </div>
       </div>
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="pwd2">Repeat password:</label>
         <div class="col-sm-10"> 
-          <input type="password" class="form-control" minlength="5" name="pwd2" id="pwd2" required placeholder="Repeat the password">
+          <input type="password" class="form-control" minlength="5" name="pwd2" id="pwd2" required placeholder="Repeat password">
           <small class="form-text text-muted">Required.</small>
         </div>
       </div>
-      <div class="form-group row"> 
-        <div class="col-sm-offset-2 col-sm-10">
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>

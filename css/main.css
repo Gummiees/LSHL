@@ -121,7 +121,7 @@ footer .glyphicon {
 .product .product-text .product-title {
 	padding-top: 20px;
 	font-weight: bold;
-	font-size: 1.5em;
+	font-size: 1.2em;
 }
 
 .product .product-text .product-desc {
@@ -251,12 +251,16 @@ footer .glyphicon {
 	padding-bottom: 0;
 }
 
-.footer-icon {
+.footer-icon, .material-icons {
 	color: #adadad;
+}
+
+.footer-icon {
 	font-size: 2em;
 }
 
-.footer-icon:hover {
+.footer-icon:hover, 
+.material-icons:hover {
 	color: #000;
 	-webkit-transition: color 500ms ease-out;
   -moz-transition: color 500ms ease-out;

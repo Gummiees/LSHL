@@ -1,7 +1,8 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	require ('login_function.php');
+	require ('includes/login_function.php');
 	require ('mysqli_connect.php');
+include('includes/print_messages.php');
 	list ($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
 	
 	if ($check) {
@@ -13,5 +14,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	}
 	mysqli_close($dbc);
 }
-include ('login_page.php');
+include ('includes/login_page.php');
 ?>

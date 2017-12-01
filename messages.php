@@ -1,6 +1,7 @@
 <?php
 require ('mysqli_connect.php');
 include ('includes/header.php');
+include('includes/print_messages.php');
 
 
 

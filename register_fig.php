@@ -1,5 +1,6 @@
 <?php
 include ('includes/header.php');
+include('includes/print_messages.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   require ('mysqli_connect.php');
@@ -59,17 +60,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
     $r = @mysqli_query ($dbc, $q);
     if ($r) {
-      echo "<div class='alert alert-success alert-dismissible show' role='alert'>Thank you. We will review the register and post it as soon as posible.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+      echo print_message('success', 'Thank you. We will review the register and post it as soon as posible.');
     } else {
-      echo "<div class='alert alert-danger alert-dismissible show' role='alert'>Something went wrong due to our system. Sorry for the inconvenience.<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
-        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+      echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
+      echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
     }
     mysqli_close($dbc);
     include ('includes/footer.html'); 
     exit();
   } else {
     foreach ($errors as $msg) {
-      echo "<div class='alert alert-danger alert-dismissible show' role='alert'>$msg<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>\n";
+      echo print_message('danger', $msg);
     }
   }
 }
@@ -119,8 +120,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <span class="fa fa-plus-square" onclick="addImages()" style="font-size:1.5em; color: #8E44AD; margin-left: 10px;"></span>
       </div>
       <div id="add-images"></div>
-      <div class="form-group row"> 
-        <div class="col-sm-offset-2 col-sm-10">
+      <div class="form-group row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-10">
           <button type="submit" class="btn btn-primary">Submit</button>
         </div>
       </div>
