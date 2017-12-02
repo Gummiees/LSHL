@@ -5,6 +5,7 @@
       $pass = $_COOKIE['pass'];
       $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
   		$dbc = @mysqli_connect ('localhost', 'root', '', 'u787804074_lshl');
+			mysqli_set_charset($dbc, 'utf8');
       $r = @mysqli_query ($dbc, $q);
       $num = mysqli_num_rows($r);
       if ($num == 1) return true;
