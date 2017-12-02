@@ -114,8 +114,8 @@ if (isset($_COOKIE['username'])) {
         } else {
           foreach ($errors as $msg) echo print_message('danger', $msg);
         }
-        include('includes/edit_fig_page.php');
       }
+      include('includes/edit_fig_page.php');
     } else echo print_message('danger', 'The figure does not exist or is not yours, therefore you cannot edit it.');
   } else echo print_message('danger', 'You must choose a figure to edit.');
 } else echo print_message('danger', 'You must log in to edit your figures.');
