@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
   }
   if (!empty($_POST['desc'])) {
-    if ($_POST['desc'] <= 500) {
+    if (strlen($_POST['desc']) <= 500) {
       $d = mysqli_real_escape_string($dbc, trim($_POST['desc']));
     } else {
       $errors[] = 'The description is too long.';
@@ -74,9 +74,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $d = '';
   }
   if (!empty($_POST['image'])) {
-    $pattern = "/(https?:\/\/.*\.(?:png|jpg))/";
+    $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
     if (preg_match ($pattern, trim($_POST['image']))) {
-      if (trim($_POST['image']) <= 250) {
+      if (strlen(trim($_POST['image'])) <= 250) {
         $img = mysqli_real_escape_string($dbc, trim($_POST['image']));
       } else {
         $errors[] = 'The link image is too long.';

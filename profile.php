@@ -32,18 +32,10 @@ if (isset($_GET['stars'])) {
 		    		echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
 				    echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
 				  }
-	    	} else {
-		    	echo print_message('danger', 'You cannot vote twice the same seller.');
-				}
-    	} else {
-    		echo print_message('danger', 'The buyer username was not found.');
-    	}			
-		} else {
-    	echo print_message('danger', 'Your username was not found.');
-		}
-	} else {
-    echo print_message('danger', '>You cannot rate yourself.');
-	}
+	    	} else echo print_message('danger', 'You cannot vote twice the same seller.');
+    	} else echo print_message('danger', 'The buyer username was not found.');	
+		} else echo print_message('danger', 'Your username was not found.');
+	} else echo print_message('danger', 'You cannot rate yourself.');
 }
 if (isset($_GET['username'])) {
 	$id = $_GET['username'];
@@ -72,7 +64,7 @@ if (isset($_GET['username'])) {
 		}
 		mysqli_free_result ($r);
 	}
-}
+} else echo print_message('danger', 'You must be logged in to see your profile.');
 
 include('includes/footer.html');
 mysqli_close($dbc);

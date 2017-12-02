@@ -288,3 +288,29 @@ footer .glyphicon {
 .search-bar select {
   font-family: 'FontAwesome', 'Roboto', sans-serif;
 }
+
+.edit-image-figure-row {
+  display: flex;
+  justify-content: center;
+	width: 100%;
+}
+
+.edit-image-figure {
+  display: flex;
+	border: 1px solid #8E44AD;
+	border-radius: 3px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.checkbox-image input{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.edit-image-figure img {
+  margin:auto;
+	width: 100%;
+	height: auto;
+	max-height: 300px;
+}

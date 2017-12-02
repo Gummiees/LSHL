@@ -38,7 +38,7 @@ if (isset($_COOKIE['username'])) {
       }
     }
     if (!empty($_POST['desc'])) {
-      if ($_POST['desc'] <= 500) {
+      if (strlen($_POST['desc']) <= 500) {
         if ($d != $_POST['desc']) {
           if (isset($inserts)) $inserts .= ", description='".mysqli_real_escape_string($dbc, trim($_POST['desc']))."'";
           else $inserts = "description='".mysqli_real_escape_string($dbc, trim($_POST['desc']))."'";
@@ -53,9 +53,9 @@ if (isset($_COOKIE['username'])) {
       }
     }
     if (!empty($_POST['image'])) {
-      $pattern = "/(https?:\/\/.*\.(?:png|jpg))/";
+      $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
       if (preg_match ($pattern, trim($_POST['image']))) {
-        if (trim($_POST['image']) <= 250) {
+        if (strlen(trim($_POST['image'])) <= 250) {
         if ($img != $_POST['image']) {
           if (!isset($inserts)) $inserts = "image='".mysqli_real_escape_string($dbc, trim($_POST['image']))."'";
           else $inserts .= ", image='".mysqli_real_escape_string($dbc, trim($_POST['image']))."'";

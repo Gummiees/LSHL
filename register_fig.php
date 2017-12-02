@@ -37,15 +37,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   if (empty($_POST['image'])) {
     $errors[] = 'You forgot to enter the figure image.';
   } else {
-    $pattern = "/(https?:\/\/.*\.(?:png|jpg))/";
+    $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
     if (preg_match ($pattern, trim($_POST['image']))) {
-      $image[] = mysqli_real_escape_string($dbc, trim($_POST['image']));
-      for ($i=0; !empty($_POST['image'.$i]); $i++) {
-        if (preg_match ($pattern, trim($_POST['image']))) {
-          $image[] = mysqli_real_escape_string($dbc, trim($_POST['image'.$i]));
+      if (strlen(trim($_POST['image'])) <= 250) {
+        $image[] = mysqli_real_escape_string($dbc, trim($_POST['image']));
+        for ($i=0; !empty($_POST['image'.$i]); $i++) {
+          if (preg_match ($pattern, trim($_POST['image'.$i]))) {
+            if (strlen(trim($_POST['image'])) <= 250) {
+              $image[] = mysqli_real_escape_string($dbc, trim($_POST['image'.$i]));
+            }
+          }
         }
+        $strimg = implode(",", $image);
+      } else {
+      $errors[] = 'The link is too long.';
       }
-      $strimg = implode(",", $image);
     }else {
       $errors[] = 'The link is not an image.';
     }
