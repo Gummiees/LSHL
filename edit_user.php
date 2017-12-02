@@ -3,7 +3,7 @@ include ('includes/header.php');
 include('includes/print_messages.php');
 require ('mysqli_connect.php');
 
-if (isset($_COOKIE['username'])) {
+if (check_cookie()) {
   $uid = $_COOKIE['username'];
   $q = "SELECT email, first_name, last_name, telephone, description FROM users WHERE username='$uid'";
   $r = @mysqli_query ($dbc, $q);
@@ -92,10 +92,7 @@ if (isset($_COOKIE['username'])) {
       }
     }
   }
-}
-mysqli_close($dbc);
 ?>
-
 <div class="row text-center login-title">
   <div class="col-sm-12 text-center">
     <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Edit user info</h1>
@@ -173,5 +170,7 @@ mysqli_close($dbc);
   </div>
 </div>
 <?php
+} else echo print_message('danger', 'You must be logged in to edit your profile.');
+mysqli_close($dbc);
 include ('includes/footer.html');
 ?>

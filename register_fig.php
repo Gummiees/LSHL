@@ -1,85 +1,87 @@
 <?php
 include ('includes/header.php');
 include('includes/print_messages.php');
+require ('mysqli_connect.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  require ('mysqli_connect.php');
-  $errors = array();
-  if (empty($_POST['name'])) {
-    $errors[] = 'You forgot to enter the figure name.';
-  } else {
-    if (strlen($_POST['name']) < 5) {
-      $errors[] = 'The name is too short.';
-    } else if (strlen($_POST['name']) > 50) {
-      $errors[] = 'The name is too long.';
+if (check_cookie()) {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require ('mysqli_connect.php');
+    $errors = array();
+    if (empty($_POST['name'])) {
+      $errors[] = 'You forgot to enter the figure name.';
     } else {
-      $name = mysqli_real_escape_string($dbc, trim($_POST['name']));
+      if (strlen($_POST['name']) < 5) {
+        $errors[] = 'The name is too short.';
+      } else if (strlen($_POST['name']) > 50) {
+        $errors[] = 'The name is too long.';
+      } else {
+        $name = mysqli_real_escape_string($dbc, trim($_POST['name']));
+      }
     }
-  }
-  if (empty($_POST['desc'])) {
-    $errors[] = 'You forgot to enter the figure description.';
-  } else {
-    if (strlen($_POST['desc']) > 1000) {
-      $errors[] = 'The description is too long.';
-    }else {
-      $desc = mysqli_real_escape_string($dbc, trim($_POST['desc']));
+    if (empty($_POST['desc'])) {
+      $errors[] = 'You forgot to enter the figure description.';
+    } else {
+      if (strlen($_POST['desc']) > 1000) {
+        $errors[] = 'The description is too long.';
+      }else {
+        $desc = mysqli_real_escape_string($dbc, trim($_POST['desc']));
+      }
     }
-  }
-  if (empty($_POST['price'])) {
-    $errors[] = 'You forgot to enter the figure price.';
-  } else {
-    if ($_POST['price'] <= 0) {
-      $errors[] = 'The price must be more than 0.';
-    }else {
-      $price = mysqli_real_escape_string($dbc, trim($_POST['price']));
+    if (empty($_POST['price'])) {
+      $errors[] = 'You forgot to enter the figure price.';
+    } else {
+      if ($_POST['price'] <= 0) {
+        $errors[] = 'The price must be more than 0.';
+      }else {
+        $price = mysqli_real_escape_string($dbc, trim($_POST['price']));
+      }
     }
-  }
-  if (empty($_POST['image'])) {
-    $errors[] = 'You forgot to enter the figure image.';
-  } else {
-    $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
-    if (preg_match ($pattern, trim($_POST['image']))) {
-      if (strlen(trim($_POST['image'])) <= 250) {
-        $image[] = mysqli_real_escape_string($dbc, trim($_POST['image']));
-        for ($i=0; !empty($_POST['image'.$i]); $i++) {
-          if (preg_match ($pattern, trim($_POST['image'.$i]))) {
-            if (strlen(trim($_POST['image'])) <= 250) {
-              $image[] = mysqli_real_escape_string($dbc, trim($_POST['image'.$i]));
+    if (empty($_POST['image'])) {
+      $errors[] = 'You forgot to enter the figure image.';
+    } else {
+      $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
+      if (preg_match ($pattern, trim($_POST['image']))) {
+        if (strlen(trim($_POST['image'])) <= 250) {
+          $image[] = mysqli_real_escape_string($dbc, trim($_POST['image']));
+          for ($i=0; !empty($_POST['image'.$i]); $i++) {
+            if (preg_match ($pattern, trim($_POST['image'.$i]))) {
+              if (strlen(trim($_POST['image'])) <= 250) {
+                $image[] = mysqli_real_escape_string($dbc, trim($_POST['image'.$i]));
+              }
             }
           }
+          $strimg = implode(",", $image);
+        } else {
+        $errors[] = 'The link is too long.';
         }
-        $strimg = implode(",", $image);
-      } else {
-      $errors[] = 'The link is too long.';
+      }else {
+        $errors[] = 'The link is not an image.';
       }
-    }else {
-      $errors[] = 'The link is not an image.';
     }
-  }
 
-  if (empty($errors)) {
-    $uid = $_COOKIE['username'];
-    $q = "SELECT user_id FROM users WHERE username='$uid'";
-    $r = @mysqli_query($dbc, $q);
-    $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
-    $id = $row['user_id'];
-    $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
-    $r = @mysqli_query ($dbc, $q);
-    if ($r) {
-      echo print_message('success', 'Thank you. We will review the register and post it as soon as posible.');
+    if (empty($errors)) {
+      $uid = $_COOKIE['username'];
+      $q = "SELECT user_id FROM users WHERE username='$uid'";
+      $r = @mysqli_query($dbc, $q);
+      $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+      $id = $row['user_id'];
+      $q = "INSERT INTO figures (user_id, name, description, price, images, status, published) VALUES ('$id', '$name', '$desc', '$price', '$strimg', 0, NOW())";   
+      $r = @mysqli_query ($dbc, $q);
+      if ($r) {
+        echo print_message('success', 'Thank you. We will review the register and post it as soon as posible.');
+      } else {
+        echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
+        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
+      }
+      mysqli_close($dbc);
+      include ('includes/footer.html'); 
+      exit();
     } else {
-      echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
-      echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>';
-    }
-    mysqli_close($dbc);
-    include ('includes/footer.html'); 
-    exit();
-  } else {
-    foreach ($errors as $msg) {
-      echo print_message('danger', $msg);
+      foreach ($errors as $msg) {
+        echo print_message('danger', $msg);
+      }
     }
   }
-}
 ?>
 <div class="row text-center login-title">
   <div class="col-sm-12 text-center">
@@ -142,5 +144,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
 </script>
 <?php
+} else echo print_message('danger', 'You must be logged in to register a figure.');
 include ('includes/footer.html');
 ?>

@@ -4,7 +4,7 @@ if ($num == 1) {
 	//hay valoraciones
 	$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 	$avg = $row['average'];
-	if (isset($_COOKIE['username']) && $_COOKIE['username']!=$id) {
+	if (check_cookie() && $_COOKIE['username']!=$id) {
 		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=1"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=2"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=3"></a>
@@ -162,7 +162,7 @@ if ($num == 1) {
 	echo '</script></div>
 	<div class="row"><small>'.$row['average'].' average based on '.$row['total'].' votes.</small></div>';
 } else {
-	if (isset($_COOKIE['username']) && $_COOKIE['username']!=$id) {
+	if (check_cookie() && $_COOKIE['username']!=$id) {
 		echo '<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" aria-hidden="true" id="0" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=1"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="1" aria-hidden="true" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=2"></a>
 			<a class="fa fa-star-o" style="color:#8E44AD;text-decoration:none;" id="2" aria-hidden="true" onmouseover="fill(this)" href="profile.php?username='.$id.'&stars=3"></a>

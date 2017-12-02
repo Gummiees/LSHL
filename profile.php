@@ -2,6 +2,7 @@
 require ('mysqli_connect.php');
 include('includes/header.php');
 include('includes/print_messages.php');
+
 if (isset($_GET['stars'])) {
 	$stars = $_GET['stars'];
 	$bid = $_COOKIE['username'];
@@ -37,6 +38,7 @@ if (isset($_GET['stars'])) {
 		} else echo print_message('danger', 'Your username was not found.');
 	} else echo print_message('danger', 'You cannot rate yourself.');
 }
+
 if (isset($_GET['username'])) {
 	$id = $_GET['username'];
 	include('includes/index_profile.php');
@@ -50,7 +52,7 @@ if (isset($_GET['username'])) {
 		}
 		mysqli_free_result ($r);
 	}
-}else if (isset($_COOKIE['username'])) {
+} else if (check_cookie()) {
 	$id = $_COOKIE['username'];
 	$myprofile = 1;
 	include('includes/index_profile.php');
@@ -64,7 +66,7 @@ if (isset($_GET['username'])) {
 		}
 		mysqli_free_result ($r);
 	}
-} else echo print_message('danger', 'You must be logged in to see your profile.');
+}  else echo print_message('danger', 'You must be logged in to see your profile.');
 
 include('includes/footer.html');
 mysqli_close($dbc);

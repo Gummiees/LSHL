@@ -1,9 +1,9 @@
 <?php
 include ('includes/header.php');
-include('includes/print_messages.php');
+include ('includes/print_messages.php');
 require ('mysqli_connect.php');
 
-if (isset($_COOKIE['username'])) {
+if (check_cookie()) {
   if (isset($_GET['fid'])) {
     //comprobar que la figura pertenece al usuario que ha hecho login!!
     $fid = $_GET['fid'];
@@ -115,17 +115,10 @@ if (isset($_COOKIE['username'])) {
           foreach ($errors as $msg) echo print_message('danger', $msg);
         }
       }
-      include('includes/edit_fig_page.php');
+      include ('includes/edit_fig_page.php');
     } else echo print_message('danger', 'The figure does not exist or is not yours, therefore you cannot edit it.');
   } else echo print_message('danger', 'You must choose a figure to edit.');
-} else echo print_message('danger', 'You must log in to edit your figures.');
+} else echo print_message('danger', 'You must be logged in to edit your figures.');
 mysqli_close($dbc);
-?>
-
-<?php
-
-
-?>
-<?php
 include ('includes/footer.html');
 ?>

@@ -29,9 +29,6 @@ if ($num > 0) {
 				<div class="row tel-profile">
 					<i>Telephone: '.$row['telephone'].'</i>
 				</div>
-				<div class="row desc-profile">
-					<b>Selling '.$num.' figures!</b>
-				</div>
 			</div>
 		</div>
 	</div>';

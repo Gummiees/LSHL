@@ -1,20 +1,22 @@
 <?php
 include ('includes/header.php');
+include ('includes/print_messages.php');
+if (!check_cookie()) {
 if (isset($errors) && !empty($errors)) {
-	foreach ($errors as $msg) {
+  foreach ($errors as $msg) {
     echo print_message('danger', $msg);
   }
 }
 ?>
 <div class="row text-center login-title">
-	<div class="col-sm-12 text-center">
-		<h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Login</h1>
-	</div>
+  <div class="col-sm-12 text-center">
+    <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Login</h1>
+  </div>
 </div>
 <div class="row">
   <div class="col-sm-2"></div>
   <div class="col-sm-8">
-  	<form class="form-horizontal" action="login.php" method="post">
+    <form class="form-horizontal" action="login.php" method="post">
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="email">Email:</label>
         <div class="col-sm-10">
@@ -39,4 +41,6 @@ if (isset($errors) && !empty($errors)) {
     </form>
   </div>
 </div>
-<?php include ('includes/footer.html'); ?>
+<?php
+} else echo print_message('danger', 'You are already logged in.');
+include ('includes/footer.html'); ?>
