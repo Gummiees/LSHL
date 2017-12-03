@@ -1,12 +1,12 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-	require ('includes/login_function.php');
 	require ('mysqli_connect.php');
-include('includes/print_messages.php');
+	require ('includes/login_function.php');
 	list ($check, $data) = check_login($dbc, $_POST['email'], $_POST['pass']);
 	
 	if ($check) {
 		setcookie ('username', $data['username']);
+		setcookie ('pass', $data['pass']);
 		redirect_user('index.php?log=1');
 			
 	} else {

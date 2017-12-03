@@ -1,10 +1,18 @@
 <?php
-include ('includes/header.php');
 include('includes/print_messages.php');
 require ('mysqli_connect.php');
+include ('includes/header.php');
 
 if (isset($_COOKIE['username'])) {
   $uid = $_COOKIE['username'];
+  $pass = $_COOKIE['pass'];
+  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
+  $r = @mysqli_query ($dbc, $q);
+  $num = mysqli_num_rows($r);
+  if ($num != 1) {
+    require ('includes/login_function.php');
+    redirect_user('logout.php?hacked=1');
+  }
   $q = "SELECT email, first_name, last_name, telephone, description FROM users WHERE username='$uid'";
   $r = @mysqli_query ($dbc, $q);
   $num = mysqli_num_rows($r);
@@ -92,10 +100,7 @@ if (isset($_COOKIE['username'])) {
       }
     }
   }
-}
-mysqli_close($dbc);
 ?>
-
 <div class="row text-center login-title">
   <div class="col-sm-12 text-center">
     <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Edit user info</h1>
@@ -173,5 +178,7 @@ mysqli_close($dbc);
   </div>
 </div>
 <?php
+} else echo print_message('danger', 'You must be logged in to edit your profile.');
+mysqli_close($dbc);
 include ('includes/footer.html');
 ?>

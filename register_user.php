@@ -1,133 +1,134 @@
 <?php
-include ('includes/header.php');
 include('includes/print_messages.php');
+require ('mysqli_connect.php');
+include ('includes/header.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  require ('mysqli_connect.php');
-  $errors = array();
-  if (empty($_POST['email'])) {
-    $errors[] = 'You forgot to enter your email.';
-  } else {
-    $email = mysqli_real_escape_string($dbc, trim($_POST['email']));
-  }
-  if (empty($_POST['pwd1']) || empty($_POST['pwd2'])) {
-    $errors[] = 'You forgot to enter your password.';
-  } else {
-      if (strlen($_POST['pwd1']) < 5) {
-        $errors[] = 'The password is too short.';
-      } else if ($_POST['pwd1'] == $_POST['pwd2']) {
-        $pw = mysqli_real_escape_string($dbc, trim($_POST['pwd1']));
+if (!isset($_COOKIE['username'])) {
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $errors = array();
+    if (empty($_POST['email'])) {
+      $errors[] = 'You forgot to enter your email.';
+    } else {
+      $email = mysqli_real_escape_string($dbc, trim($_POST['email']));
+    }
+    if (empty($_POST['pwd1']) || empty($_POST['pwd2'])) {
+      $errors[] = 'You forgot to enter your password.';
+    } else {
+        if (strlen($_POST['pwd1']) < 5) {
+          $errors[] = 'The password is too short.';
+        } else if ($_POST['pwd1'] == $_POST['pwd2']) {
+          $pw = mysqli_real_escape_string($dbc, trim($_POST['pwd1']));
+        } else {
+          $errors[] = 'The passwords did not match.';
+        }
+    }
+    if (empty($_POST['username'])) {
+      $errors[] = 'You forgot to enter the username.';
+    } else {
+      if (5 > strlen($_POST['username'])) {
+        $errors[] = 'Username is too short.';
+      }else if (20 < strlen($_POST['username'])) {
+        $errors[] = 'Username is too long.';
       } else {
-        $errors[] = 'The passwords did not match.';
+        $usr = mysqli_real_escape_string($dbc, trim($_POST['username']));
       }
-  }
-  if (empty($_POST['username'])) {
-    $errors[] = 'You forgot to enter the username.';
-  } else {
-    if (5 > strlen($_POST['username'])) {
-      $errors[] = 'Username is too short.';
-    }else if (20 < strlen($_POST['username'])) {
-      $errors[] = 'Username is too long.';
+    }
+    if (empty($_POST['firstname'])) {
+      $errors[] = 'You forgot to enter your first name.';
     } else {
-      $usr = mysqli_real_escape_string($dbc, trim($_POST['username']));
-    }
-  }
-  if (empty($_POST['firstname'])) {
-    $errors[] = 'You forgot to enter your first name.';
-  } else {
-    if (3 > strlen($_POST['firstname'])) {
-      $errors[] = 'The first name is too short.';
-    }else if (20 < strlen($_POST['firstname'])) {
-      $errors[] = 'The first name is too long.';
-    } else {
-      $fn = mysqli_real_escape_string($dbc, trim($_POST['firstname']));
-    }
-  }
-  if (empty($_POST['lastname'])) {
-    $errors[] = 'You forgot to enter your last name.';
-  } else {
-    if (3 > strlen($_POST['lastname'])) {
-      $errors[] = 'The last name is too short.';
-    }else if (40 < strlen($_POST['lastname'])) {
-      $errors[] = 'The last name is too long.';
-    } else {
-      $ln = mysqli_real_escape_string($dbc, trim($_POST['lastname']));
-    }
-  }
-  if (empty($_POST['telephone'])) {
-    $errors[] = 'You forgot to enter your telephone.';
-  } else {
-    $pattern = "/^\d{9}$/";
-    if (preg_match ($pattern, trim($_POST['telephone']))) {
-      $t = mysqli_real_escape_string($dbc, trim($_POST['telephone']));
-    }else {
-      $errors[] = 'The telephone is invalid.';
-    }
-  }
-  if (!empty($_POST['desc'])) {
-    if (strlen($_POST['desc']) <= 500) {
-      $d = mysqli_real_escape_string($dbc, trim($_POST['desc']));
-    } else {
-      $errors[] = 'The description is too long.';
-    }
-  }else {
-    $d = '';
-  }
-  if (!empty($_POST['image'])) {
-    $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
-    if (preg_match ($pattern, trim($_POST['image']))) {
-      if (strlen(trim($_POST['image'])) <= 250) {
-        $img = mysqli_real_escape_string($dbc, trim($_POST['image']));
+      if (3 > strlen($_POST['firstname'])) {
+        $errors[] = 'The first name is too short.';
+      }else if (20 < strlen($_POST['firstname'])) {
+        $errors[] = 'The first name is too long.';
       } else {
-        $errors[] = 'The link image is too long.';
+        $fn = mysqli_real_escape_string($dbc, trim($_POST['firstname']));
+      }
+    }
+    if (empty($_POST['lastname'])) {
+      $errors[] = 'You forgot to enter your last name.';
+    } else {
+      if (3 > strlen($_POST['lastname'])) {
+        $errors[] = 'The last name is too short.';
+      }else if (40 < strlen($_POST['lastname'])) {
+        $errors[] = 'The last name is too long.';
+      } else {
+        $ln = mysqli_real_escape_string($dbc, trim($_POST['lastname']));
+      }
+    }
+    if (empty($_POST['telephone'])) {
+      $errors[] = 'You forgot to enter your telephone.';
+    } else {
+      $pattern = "/^\d{9}$/";
+      if (preg_match ($pattern, trim($_POST['telephone']))) {
+        $t = mysqli_real_escape_string($dbc, trim($_POST['telephone']));
+      }else {
+        $errors[] = 'The telephone is invalid.';
+      }
+    }
+    if (!empty($_POST['desc'])) {
+      if (strlen($_POST['desc']) <= 500) {
+        $d = mysqli_real_escape_string($dbc, trim($_POST['desc']));
+      } else {
+        $errors[] = 'The description is too long.';
       }
     }else {
-      $errors[] = 'The link is not an image.';
+      $d = '';
     }
-  } else {
-    $img = '';
-  }
- 
-  if (empty($errors)) {
-    $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$usr' OR email='$email'";
-    $r = @mysqli_query ($dbc, $q);
-    $num = mysqli_num_rows($r);
-    $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
-    if ($row['total'] > 0) {
-      echo print_message('danger', 'The username and/or email are/is already taken.');
+    if (!empty($_POST['image'])) {
+      $pattern = "/(https?:\/\/.*\.(?:png|jpg|jpeg|gif))/";
+      if (preg_match ($pattern, trim($_POST['image']))) {
+        if (strlen(trim($_POST['image'])) <= 250) {
+          $img = mysqli_real_escape_string($dbc, trim($_POST['image']));
+        } else {
+          $errors[] = 'The link image is too long.';
+        }
+      }else {
+        $errors[] = 'The link is not an image.';
+      }
     } else {
-      if ($d == '') {
-        if ($img == '') {
-          $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), DEFAULT, DEFAULT, NOW())"; 
-        } else {
-          $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), '$img', DEFAULT, NOW())"; 
-        }
-      } else {
-        if ($img == '') {
-          $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), DEFAULT, '$d', NOW())"; 
-        } else {
-          $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), '$img', '$d', NOW())"; 
-        }
-      }  
+      $img = '';
+    }
+   
+    if (empty($errors)) {
+      $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$usr' OR email='$email'";
       $r = @mysqli_query ($dbc, $q);
-      if ($r) {
-        echo print_message('success', 'Thank you. You can now sign in and register your figures to sell or buy some of them!');
+      $num = mysqli_num_rows($r);
+      $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+      if ($row['total'] > 0) {
+        echo print_message('danger', 'The username and/or email are/is already taken.');
       } else {
-        echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
-        echo '<p>' . mysqli_error($dbc) . '<br /><br />Query: ' . $q . '</p>'; 
+        if ($d == '') {
+          if ($img == '') {
+            $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), DEFAULT, DEFAULT, NOW())"; 
+          } else {
+            $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), '$img', DEFAULT, NOW())"; 
+          }
+        } else {
+          if ($img == '') {
+            $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), DEFAULT, '$d', NOW())"; 
+          } else {
+            $q = "INSERT INTO users (username, first_name, last_name, email, telephone, pass, image, description,  registration_date) VALUES ('$usr', '$fn', '$ln', '$email', '$t', SHA1('$pw'), '$img', '$d', NOW())"; 
+          }
+        }  
+        $r = @mysqli_query ($dbc, $q);
+        if ($r) {
+          echo print_message('success', 'Thank you. You can now sign in and register your figures to sell or buy some of them!');
+        } else {
+          echo print_message('danger', 'Something went wrong due to our system. Sorry for the inconvenience.');
+          echo '<p>'.mysqli_error($dbc).'<br /><br />Query: '.$q.'</p>'; 
+        }
+        mysqli_close($dbc);
+        include ('includes/footer.html'); 
+        exit();
       }
-      mysqli_close($dbc);
-      include ('includes/footer.html'); 
-      exit();
-    }
-  } else {
-    foreach ($errors as $msg) {
-      echo print_message('danger', $msg);
+    } else {
+      foreach ($errors as $msg) {
+        echo print_message('danger', $msg);
+      }
     }
   }
-}
-?>
-<div class="row text-center login-title">
+  ?>
+  <div class="row text-center login-title">
   <div class="col-sm-12 text-center">
     <h1 style="color: #8E44AD; font-size: 4em; text-align: center !important;">Register</h1>
   </div>
@@ -208,6 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </form>
   </div>
 </div>
-<?php
+<?php 
+} else echo print_message('danger', 'You cannot register being logged in.');
 include ('includes/footer.html');
 ?>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2017 a las 22:14:52
--- Versión del servidor: 10.1.28-MariaDB
--- Versión de PHP: 7.1.10
+-- Tiempo de generación: 02-12-2017 a las 16:38:57
+-- Versión del servidor: 5.7.17
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `figures`
 --
 
+DROP TABLE IF EXISTS `figures`;
 CREATE TABLE `figures` (
   `figure_id` mediumint(8) UNSIGNED NOT NULL,
   `user_id` mediumint(8) UNSIGNED NOT NULL,
@@ -59,7 +60,7 @@ INSERT INTO `figures` (`figure_id`, `user_id`, `name`, `description`, `price`, `
 (28, 3, 'Max Factory Sword Art Online II: Sinon Figma', 'Plz.', 72.09, 'https://images-na.ssl-images-amazon.com/images/I/61h9kPp306L._SL1000_.jpg,https://images-na.ssl-images-amazon.com/images/I/513f03QJS6L.jpg,https://images-na.ssl-images-amazon.com/images/I/51tVKti6jyL.jpg,https://images-na.ssl-images-amazon.com/images/I/51xgJKzrOEL.jpg,https://images-na.ssl-images-amazon.com/images/I/41smnwcKRFL.jpg', 1, '2017-11-29 00:00:00'),
 (29, 5, 'Furyu 6.3\" RWBY: Ruby Rose Special Figure', 'Officially Licensed by Furyu\r\nMinor Assembly Required\r\nLimited Quantity\r\nPerfect for RWBY Fans\r\nSize Approx: 2\"L x 2\"W x 6.3\"H', 34.52, 'https://images-na.ssl-images-amazon.com/images/I/81QL7mPAxTL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81wyW5fTpWL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81Inf-TEnxL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
 (30, 4, 'KonoSuba: Megumin', 'Officially Licensed by Sega\r\nNew and sealed inside retail packaging\r\nVery limited and collectible\r\nMinor assembly required\r\nApprox. Size: 5\"L x 4\"W x 7.8\"H', 42.95, 'https://images-na.ssl-images-amazon.com/images/I/818pavI3caL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81GoG1jt3OL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/910V-ZyDCPL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
-(31, 3, 'Madoka Magica SQ 7\" Homura Akemi Figure', 'Officially Licensed Figure from Banpresto Japan\r\nMakes a great gift!\r\nMinor assembly required\r\nLimited Quantity\r\nApprox. Size: 3\"L x 3\"W x 7\"H', 20.99, 'https://images-na.ssl-images-amazon.com/images/I/71eNozGi5DL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71K9oVWnDXL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71MepwxmBsL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
+(31, 3, 'cambio de titulo', 'cambio de desc', 100, 'https://cloud.netlifyusercontent.com/assets/344dbf88-fdf9-42bb-adb4-46f01eedd629/68dd54ca-60cf-4ef7-898b-26d7cbe48ec7/10-dithering-opt.jpg,https://www.w3schools.com/w3css/img_lights.jpg,https://amazingslider.com/wp-content/uploads/2012/12/dandelion.jpg,http://cdn.newmediaretailer.com/1/assets/v1/318000/318490/web_correctingyourdogfromliftinghisleg.jpg,https://www.codeproject.com/KB/GDI-plus/ImageProcessing2/flip.jpg', 1, '2017-11-29 00:00:00'),
 (32, 12, 'Date A Live Yoshino Figurine Brinquedos PVC', 'Name:Date A Live Figures\r\nCommodity material:PVC\r\nCondition:100% NEW\r\nSize:about  18cm', 28.3, 'https://ae01.alicdn.com/kf/HTB1AuJsJXXXXXcKaXXXq6xXFXXXo/Japan-Anime-Figure-Date-A-Live-Yoshino-Figurine-Brinquedos-PVC-Action-Figure-Juguetes-Collectible-Model-Doll.jpg,https://ae01.alicdn.com/kf/HTB1T7o5QFXXXXc5XpXXq6xXFXXXh/18cmSAINTGI-1pc-Anime-Cute-Nendoroid-4-Date-A-Live-Yoshino-PVC-Action-Figure-Model-Brinquedos-Tokisaki.jpg', 1, '2017-11-29 16:55:42');
 
 -- --------------------------------------------------------
@@ -68,6 +69,7 @@ INSERT INTO `figures` (`figure_id`, `user_id`, `name`, `description`, `price`, `
 -- Estructura de tabla para la tabla `messages`
 --
 
+DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages` (
   `message_id` mediumint(8) UNSIGNED NOT NULL,
   `origin_id` mediumint(8) UNSIGNED NOT NULL,
@@ -82,6 +84,7 @@ CREATE TABLE `messages` (
 -- Estructura de tabla para la tabla `stars`
 --
 
+DROP TABLE IF EXISTS `stars`;
 CREATE TABLE `stars` (
   `star_id` mediumint(8) NOT NULL,
   `buyer_id` mediumint(8) NOT NULL,
@@ -98,7 +101,9 @@ INSERT INTO `stars` (`star_id`, `buyer_id`, `seller_id`, `value`) VALUES
 (3, 12, 1, 3),
 (7, 13, 1, 4),
 (8, 3, 2, 5),
-(9, 3, 1, 5);
+(9, 3, 1, 5),
+(10, 12, 4, 1),
+(11, 12, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -106,6 +111,7 @@ INSERT INTO `stars` (`star_id`, `buyer_id`, `seller_id`, `value`) VALUES
 -- Estructura de tabla para la tabla `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` mediumint(8) UNSIGNED NOT NULL,
   `username` varchar(20) NOT NULL,
@@ -132,7 +138,8 @@ INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, 
 (10, 'morgan', 'Morgan', 'Suisa', 'morgan@dasuisa.cat', '420420420', '9706377a84ddf99fa147d587c02c6a684c7a3465', 'https://vignette.wikia.nocookie.net/creation/images/2/22/ANGRY_MARGE_BECH.jpg', 'NO TE PASES DE LISTO CON MIGO.', '2017-11-28 18:25:40'),
 (11, 'prueba', 'prueba', 'prueba', 'prueba@prueba.com', '000000000', 'prueba', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Hey there! I\'m using Love Second Hand Live!', '2017-11-28 00:00:00'),
 (12, 'test1', 'test', 'test', 'test@test.com', '123123123', 'b444ac06613fc8d63795be9ad0beaf55011936ac', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'testing', '2017-11-28 20:22:29'),
-(13, 'moguel', 'Moguel', 'Haspíros', 'moguel@chiribitas.com', '012012012', 'ab70c58329dedb2985fe9c3d8c9a78c870e0988f', 'https://suspills.files.wordpress.com/2013/01/fake-smile.jpg', 'Soy Moguel', '2017-11-30 17:15:18');
+(13, 'moguel', 'Moguel', 'Haspíros', 'moguel@chiribitas.com', '012012012', 'ab70c58329dedb2985fe9c3d8c9a78c870e0988f', 'https://suspills.files.wordpress.com/2013/01/fake-smile.jpg', 'Soy Moguel', '2017-11-30 17:15:18'),
+(14, 'username', 'firstname', 'lastname', 'email@email.com', '987654321', '5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Description', '2017-12-02 14:34:36');
 
 --
 -- Índices para tablas volcadas
@@ -178,25 +185,21 @@ ALTER TABLE `users`
 --
 ALTER TABLE `figures`
   MODIFY `figure_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
 --
 -- AUTO_INCREMENT de la tabla `messages`
 --
 ALTER TABLE `messages`
   MODIFY `message_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `stars`
 --
 ALTER TABLE `stars`
-  MODIFY `star_id` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
+  MODIFY `star_id` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+  MODIFY `user_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Restricciones para tablas volcadas
 --

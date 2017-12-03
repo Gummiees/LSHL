@@ -27,6 +27,15 @@
           <a class="nav-item nav-link" href="index.php">HOME</a>
 <?php 
 if (isset($_COOKIE['username'])) {
+  $id = $_COOKIE['username'];
+  $pass = $_COOKIE['pass'];
+  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$id' OR pass='$pass'";
+  $r = @mysqli_query ($dbc, $q);
+  $num = mysqli_num_rows($r);
+  if ($num != 1) {
+    require ('includes/login_function.php');
+    redirect_user('logout.php?hacked=1');
+  }
   echo '<a class="nav-item nav-link" href="profile.php">PROFILE</a><a class="nav-item nav-link" href="logout.php">LOGOUT</a><a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a><a class="nav-item nav-link" href="messages.php">MESSAGES</a>';
 } else {
   echo '<a class="nav-item nav-link" href="login.php">LOGIN</a><a class="nav-item nav-link" href="register_user.php">REGISTER USER</a>';

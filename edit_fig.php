@@ -1,18 +1,25 @@
 <?php
-include ('includes/header.php');
-include('includes/print_messages.php');
+include ('includes/print_messages.php');
 require ('mysqli_connect.php');
+include ('includes/header.php');
 
 if (isset($_COOKIE['username'])) {
-  if (isset($_GET['fid'])) {
+  $uid = $_COOKIE['username'];
+  $pass = $_COOKIE['pass'];
+  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
+  $r = @mysqli_query ($dbc, $q);
+  if (mysqli_num_rows($r) != 1) {
+    require ('includes/login_function.php');
+    redirect_user('logout.php?hacked=1');
+  }
+  if (isset($_GET['fid']) && is_numeric($_GET['fid'])) {
     //comprobar que la figura pertenece al usuario que ha hecho login!!
     $fid = $_GET['fid'];
     $uid = $_COOKIE['username'];
 
     $q = "SELECT F.name, F.description, F.price, F.images FROM figures AS F INNER JOIN users AS U ON F.user_id = U.user_id WHERE F.figure_id=$fid AND U.username='$uid'";
     $r = @mysqli_query ($dbc, $q);
-    $num = mysqli_num_rows($r);
-    if ($num == 1) {
+    if (mysqli_num_rows($r) == 1) {
       $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
       $n = $row['name'];
       $d = $row['description'];
@@ -115,17 +122,10 @@ if (isset($_COOKIE['username'])) {
           foreach ($errors as $msg) echo print_message('danger', $msg);
         }
       }
-      include('includes/edit_fig_page.php');
+      include ('includes/edit_fig_page.php');
     } else echo print_message('danger', 'The figure does not exist or is not yours, therefore you cannot edit it.');
   } else echo print_message('danger', 'You must choose a figure to edit.');
-} else echo print_message('danger', 'You must log in to edit your figures.');
+} else echo print_message('danger', 'You must be logged in to edit your figures.');
 mysqli_close($dbc);
-?>
-
-<?php
-
-
-?>
-<?php
 include ('includes/footer.html');
 ?>
