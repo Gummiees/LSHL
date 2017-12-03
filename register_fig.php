@@ -14,7 +14,6 @@ if (isset($_COOKIE['username'])) {
     redirect_user('logout.php?hacked=1');
   }
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require ('mysqli_connect.php');
     $errors = array();
     if (empty($_POST['name'])) {
       $errors[] = 'You forgot to enter the figure name.';
