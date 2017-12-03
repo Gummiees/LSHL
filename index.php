@@ -1,12 +1,13 @@
 <?php
-include ('includes/header.php');
 require ('mysqli_connect.php');
+include ('includes/header.php');
 include('includes/print_messages.php');
 
 if (isset($_GET['log'])) {
 	if ($_GET['log'] == 1 && isset($_COOKIE['username'])) echo print_message('success', 'Successfully logged in.');
 	else if ($_GET['log'] == 2  && !isset($_COOKIE['username'])) echo print_message('success', 'Successfully logged out.');
 	else if ($_GET['log'] == 3  && !isset($_COOKIE['username'])) echo print_message('danger', 'Logged out because someone was trying to hijack your account.');
+	else if ($_GET['log'] == 4  && isset($_COOKIE['username'])) echo print_message('success', 'Your figure was Successfully deleted.');
 }
 
 

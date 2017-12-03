@@ -12,7 +12,7 @@ if ($num > 0) {
 			</div>
 			<div class="col-sm-9">
 				<div class="row"><div class="col-sm-9 username-profile">'.$id;
-	if (isset($myprofile)) echo '<a href="edit_user.php" style="margin-left: 50px;"><span class="material-icons material-icon-link">mode_edit</span></a>';
+	if (isset($myprofile)) echo '<a href="edit_user.php" style="margin-left: 50px;"><span class="material-icons">mode_edit</span></a><a href="del_user.php"><span class="material-icons">delete_forever</span></a>';
 	echo '</div></div>';
 	$q = "SELECT seller_id, AVG(value) AS average, COUNT(value) AS total FROM stars WHERE seller_id=$uid GROUP BY seller_id";		
 	$r = @mysqli_query ($dbc, $q);

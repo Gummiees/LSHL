@@ -52,8 +52,16 @@ if (isset($_GET['username'])) {
 		}
 		mysqli_free_result ($r);
 	}
-} else if (check_cookie()) {
-	$id = $_COOKIE['username'];
+} else if (isset($_COOKIE['username'])) {
+  $id = $_COOKIE['username'];
+  $pass = $_COOKIE['pass'];
+  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$id' OR pass='$pass'";
+  $r = @mysqli_query ($dbc, $q);
+  $num = mysqli_num_rows($r);
+  if ($num != 1) {
+  	require ('includes/login_function.php');
+  	redirect_user('logout.php?hacked=1');
+  }
 	$myprofile = 1;
 	include('includes/index_profile.php');
 	$q = "SELECT U.username, F.figure_id, F.name, F.description, F.price, F.images, F.status FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.username = '$id' ORDER BY F.published DESC";		

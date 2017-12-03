@@ -1,7 +1,8 @@
 <?php
+require ('mysqli_connect.php');
 include ('includes/header.php');
 include ('includes/print_messages.php');
-if (!check_cookie()) {
+if (!isset($_COOKIE['username'])) {
 if (isset($errors) && !empty($errors)) {
   foreach ($errors as $msg) {
     echo print_message('danger', $msg);

@@ -1,9 +1,18 @@
 <?php
-include ('includes/header.php');
 include('includes/print_messages.php');
 require ('mysqli_connect.php');
+include ('includes/header.php');
 
-if (check_cookie()) {
+if (isset($_COOKIE['username'])) {
+  $uid = $_COOKIE['username'];
+  $pass = $_COOKIE['pass'];
+  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
+  $r = @mysqli_query ($dbc, $q);
+  $num = mysqli_num_rows($r);
+  if ($num != 1) {
+    require ('includes/login_function.php');
+    redirect_user('logout.php?hacked=1');
+  }
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require ('mysqli_connect.php');
     $errors = array();

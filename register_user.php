@@ -1,10 +1,10 @@
 <?php
-include ('includes/header.php');
 include('includes/print_messages.php');
+require ('mysqli_connect.php');
+include ('includes/header.php');
 
 if (!isset($_COOKIE['username'])) {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require ('mysqli_connect.php');
     $errors = array();
     if (empty($_POST['email'])) {
       $errors[] = 'You forgot to enter your email.';
