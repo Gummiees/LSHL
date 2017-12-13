@@ -6,7 +6,7 @@ $d = $row['description'];
 $v = $row['viewed'];
 $date = $row['date'];
 
-$q1 = "SELECT username FROM users WHERE user_id='$oid'";
+$q1 = "SELECT username FROM users WHERE user_id=$oid";
 $r1 = @mysqli_query($dbc, $q1);
 $n1 = @mysqli_num_rows($r1);
 if ($n1 > 0) {
@@ -47,7 +47,7 @@ if ($n1 > 0) {
 					  </span>
 					</a>
 	        <a href="#" data-toggle="tooltip" title="Reply"><span class="material-icons">reply</span></a>
-	        <a href="#" data-toggle="tooltip" title="Delete"><span class="material-icons">delete_forever</span></a>
+	        <a href="#" onclick="DeleteMessage(<?php echo $i;?>)" data-toggle="tooltip" title="Delete"><span class="material-icons">delete_forever</span></a>
 	      </div>
 	   	</div>
     </h5>

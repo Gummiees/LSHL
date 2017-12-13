@@ -40,6 +40,7 @@ if (isset($_GET['stars'])) {
 }
 
 if (isset($_GET['username'])) {
+	$myprofile = 0;
 	$id = $_GET['username'];
 	include('includes/index_profile.php');
 	$q = "SELECT U.username, F.name, F.description, F.price, F.images, F.status, F.figure_id FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.username='$id' ORDER BY F.published DESC";		
@@ -53,6 +54,7 @@ if (isset($_GET['username'])) {
 		mysqli_free_result ($r);
 	}
 } else if (isset($_COOKIE['username'])) {
+	$myprofile = 1;
   $id = $_COOKIE['username'];
   $pass = $_COOKIE['pass'];
   $q = "SELECT user_id FROM users WHERE username='$id' AND pass='$pass'";
@@ -62,7 +64,6 @@ if (isset($_GET['username'])) {
   	require ('includes/login_function.php');
   	redirect_user('logout.php?hacked=1');
   }
-	$myprofile = 1;
 	include('includes/index_profile.php');
 	$q = "SELECT U.username, F.figure_id, F.name, F.description, F.price, F.images, F.status FROM figures AS F INNER JOIN users AS U ON U.user_id = F.user_id WHERE U.username = '$id' ORDER BY F.published DESC";		
 	$r = @mysqli_query ($dbc, $q);
