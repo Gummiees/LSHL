@@ -1,4 +1,5 @@
 <?php
+$mid = $row['message_id'];
 $oid = $row['origin_id'];
 $t = $row['title'];
 $d = $row['description'];
@@ -13,6 +14,7 @@ if ($n1 > 0) {
 	$oid = $rw['username'];
 ?>
 <div class="card">
+	<div id="<?php echo $i;?>" style="display: none;"><?php echo $mid;?></div>
   <div class="card-header" role="tab" id="<?php echo 'header'.$i;?>">
     <h5 class="mb-0">
     	<div class="row">
@@ -32,8 +34,8 @@ if ($n1 > 0) {
 				  	</div>
 	        </a>
 	      </div>
-	      <div class="col-sm-2" style="text-align: right;">
-			    <a href="#" data-toggle="tooltip" title="<?php
+	      <div class="col-sm-2 message-buttons" style="text-align: right;">
+			    <a href="#" onclick="MarkAsViewed(<?php echo $i;?>)" data-toggle="tooltip" title="<?php
 					    			if (!$v) echo 'Mark as viewed';
 					    			else echo 'Mark as not viewed';
 					    		?>">

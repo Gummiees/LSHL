@@ -13,7 +13,7 @@ if (isset($_COOKIE['username'])) {
   }
 	$row = mysqli_fetch_array($r, MYSQLI_ASSOC);
 	$did = $row['user_id'];
-  $q = "SELECT origin_id, title, description, viewed, date FROM messages WHERE destiny_id='$did'";
+  $q = "SELECT message_id, origin_id, title, description, viewed, date FROM messages WHERE destiny_id='$did'";
   $r = @mysqli_query($dbc, $q);
   $num = @mysqli_num_rows($r);
   include('includes/show_messages_top.php');

@@ -2,7 +2,11 @@
 .messages-title a:link,
 .messages-title a:visited,
 .messages-title a:hover,
-.messages-title a:active {
+.messages-title a:active,
+.message-buttons a:link,
+.message-buttons a:visited,
+.message-buttons a:hover,
+.message-buttons a:active {
 	color: #8E44AD;
 	text-decoration: none;
 }
