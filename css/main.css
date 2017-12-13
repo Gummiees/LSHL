@@ -324,3 +324,15 @@ footer .glyphicon {
 	height: auto;
 	max-height: 300px;
 }
+
+.message-card-text {
+	text-align:center;width: 60%;display: inline-block;
+}
+
+.messages-title a:link,
+.messages-title a:visited,
+.messages-title a:hover,
+.messages-title a:active {
+	color: #8E44AD;
+	text-decoration: none;
+}

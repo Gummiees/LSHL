@@ -36,7 +36,7 @@ if (isset($_COOKIE['username'])) {
     require ('includes/login_function.php');
     redirect_user('logout.php?hacked=1');
   }
-  echo '<a class="nav-item nav-link" href="profile.php">PROFILE</a><a class="nav-item nav-link" href="logout.php">LOGOUT</a><a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a><a class="nav-item nav-link" href="messages.php">MESSAGES</a>';
+  echo '<a class="nav-item nav-link" href="profile.php">PROFILE</a><a class="nav-item nav-link" href="logout.php">LOGOUT</a><a class="nav-item nav-link" href="register_fig.php">REGISTER FIGURE</a><a class="nav-item nav-link" href="messages.php">MESSAGES <span class="badge badge-pill badge-primary" style="background-color: white;color: #8E44AD;">32</span></a>';
 } else {
   echo '<a class="nav-item nav-link" href="login.php">LOGIN</a><a class="nav-item nav-link" href="register_user.php">REGISTER USER</a>';
 }
