@@ -12,6 +12,12 @@ include('includes/print_messages.php');
 	color: #8E44AD;
 	text-decoration: none;
 }
+
+.messages-title .title-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 </style>
 <div class="row">
 	<div class="col-sm-1"></div>
@@ -28,9 +34,11 @@ include('includes/print_messages.php');
 		      	<div class="row">
 			      	<div class="col-sm-10 messages-title">
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-							    <span style="width: 20%;display: inline-block;">likefurnis</span>
-							    <span><b>This is a title</b></span>
-							    <span class="badge">12:10 AM</span>
+				        	<div class="row">
+								    <div class="col-sm-3"><span>likefurnis</span></div>
+								    <div class="col-sm-7 title-name"><span><b>This is a title</b></span></div>
+								    <div class="col-sm-2"><span class="badge">12:10 AM</span></div>
+							  	</div>
 				        </a>
 				      </div>
 				      <div class="col-sm-2" style="text-align: right;">
@@ -55,9 +63,11 @@ include('includes/print_messages.php');
 		      	<div class="row">
 			      	<div class="col-sm-10 messages-title">
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							    <span style="width: 20%;display: inline-block;">likefurnis</span>
-							    <span><b>abcdefghijklmnopqrstvwxyzabcdefghijklm...</b></span>
-							    <span class="badge">12:10 AM</span>
+							    <div class="row">
+								    <div class="col-sm-3"><span>likefurnis</span></div>
+								    <div class="col-sm-7 title-name"><span><b>abcdefghijklmnopqrstvwxyzabcdefghijklmnopqrstvwxyz</b></span></div>
+								    <div class="col-sm-2"><span class="badge">12:10 AM</span></div>
+							  	</div>
 				        </a>
 				      </div>
 				      <div class="col-sm-2" style="text-align: right;">
@@ -82,9 +92,11 @@ include('includes/print_messages.php');
 		      	<div class="row">
 			      	<div class="col-sm-10 messages-title">
 				        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							    <span style="width: 20%;display: inline-block;">likefurnis</span>
-							    <span>This is a title</span>
-							    <span class="badge">12:10 AM</span>
+							    <div class="row">
+								    <div class="col-sm-3"><span>likefurnis</span></div>
+								    <div class="col-sm-7 title-name"><span>This is a title</span></div>
+								    <div class="col-sm-2"><span class="badge">12:10 AM</span></div>
+							  	</div>
 				        </a>
 				      </div>
 				      <div class="col-sm-2" style="text-align: right;">
