@@ -55,7 +55,7 @@ if (isset($_GET['username'])) {
 } else if (isset($_COOKIE['username'])) {
   $id = $_COOKIE['username'];
   $pass = $_COOKIE['pass'];
-  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$id' OR pass='$pass'";
+  $q = "SELECT user_id FROM users WHERE username='$id' AND pass='$pass'";
   $r = @mysqli_query ($dbc, $q);
   $num = mysqli_num_rows($r);
   if ($num != 1) {
