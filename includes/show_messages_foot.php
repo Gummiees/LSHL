@@ -1,4 +1,11 @@
-  	</div>
+  	
+  			</div>
+			</div>
+    		<div class="tab-pane fade" id="send" role="tabpanel" aria-labelledby="send-tab">
+    		
+    		</div>
+  		</div>
+		</div>
   </div>
 </div>
 <script>
@@ -6,13 +13,18 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();   
 });
 
-function MarkAsViewed(i) {
+$('#myTab a').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+
+MarkAsViewed = i => {
   var mid = document.getElementById(i).innerHTML;
-  $.post("messages.php",{ message_id:mid, action:'viewed' }, function(data) {location.reload();});
+  $.post("messages.php",{ message_id:mid, action:'viewed' }, () => {location.reload();});
 }
 
-function DeleteMessage(i) {
+DeleteMessage = i => {
   var mid = document.getElementById(i).innerHTML;
-  $.post("messages.php",{ message_id:mid, action:'del' }, function(data) {location.reload();});
+  $.post("messages.php",{ message_id:mid, action:'del' }, () => {location.reload();});
 }
 </script>

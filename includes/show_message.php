@@ -1,9 +1,9 @@
 <?php
 $mid = $row['message_id'];
-$oid = $row['origin_id'];
 $t = $row['title'];
 $d = $row['description'];
-$v = $row['viewed'];
+if (!$send) $v = $row['viewed'];
+else $v = 1;
 $date = $row['date'];
 
 $q1 = "SELECT username FROM users WHERE user_id=$oid";
@@ -12,6 +12,13 @@ $n1 = @mysqli_num_rows($r1);
 if ($n1 > 0) {
 	$rw = mysqli_fetch_array($r1, MYSQLI_ASSOC);
 	$oid = $rw['username'];
+
+	$q1 = "SELECT username FROM users WHERE user_id=$did";
+	$r1 = @mysqli_query($dbc, $q1);
+	$n1 = @mysqli_num_rows($r1);
+	if ($n1 > 0) {
+		$rw = mysqli_fetch_array($r1, MYSQLI_ASSOC);
+		$did = $rw['username'];
 ?>
 <div class="card">
 	<div id="<?php echo $i;?>" style="display: none;"><?php echo $mid;?></div>
@@ -21,7 +28,7 @@ if ($n1 > 0) {
       	<div class="col-sm-10 messages-title">
 	        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#<?php echo 'collapse'.$i;?>" aria-expanded="false" aria-controls="<?php echo 'collapse'.$i;?>">
 	        	<div class="row">
-					    <div class="col-sm-3"><span><?php echo $oid;?></span></div>
+					    <div class="col-sm-3"><span><?php if (!$send) echo $oid; else echo 'To: '.$did;?></span></div>
 					    <div class="col-sm-7 title-name">
 					    	<span>
 					    		<?php
@@ -60,5 +67,6 @@ if ($n1 > 0) {
   </div>
 </div>
 <?php
-} else echo print_message('danger', 'The user that send you a message was not found.');
+	} else echo print_message('danger', 'The destiny user of the message was not found.');
+} else echo print_message('danger', 'The origin user of the message was not found.');
 ?>

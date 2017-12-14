@@ -24,4 +24,15 @@
     <a href="#" class="btn btn-primary btn-sm btn-block" role="button">New message&nbsp;&nbsp;&nbsp;<span class="fa fa-envelope-o" aria-hidden="true"></span></a>
 	</div>
   <div class="col-sm-7">
-  	<div id="accordion" role="tablist" aria-multiselectable="true">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Inbox</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="send-tab" data-toggle="tab" href="#send" role="tab" aria-controls="send" aria-selected="false">Send</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+      
