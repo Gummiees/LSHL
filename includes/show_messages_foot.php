@@ -25,6 +25,8 @@ MarkAsViewed = i => {
 
 DeleteMessage = i => {
   var mid = document.getElementById(i).innerHTML;
-  $.post("messages.php",{ message_id:mid, action:'del' }, () => {location.reload();});
+  var d0o1 = document.getElementById('d0o1'+i).innerHTML;
+  if (!parseInt(d0o1)) $.post("messages.php",{ message_id:mid, action:'del', change:'view_destiny' }, () => {location.reload();});
+  else $.post("messages.php",{ message_id:mid, action:'del', change:'view_origin' }, () => {location.reload();});
 }
 </script>

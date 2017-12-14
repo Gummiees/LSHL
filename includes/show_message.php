@@ -22,6 +22,7 @@ if ($n1 > 0) {
 ?>
 <div class="card">
 	<div id="<?php echo $i;?>" style="display: none;"><?php echo $mid;?></div>
+	<div id="<?php echo 'd0o1'.$i;?>" style="display: none;"><?php echo $send;?></div>
   <div class="card-header" role="tab" id="<?php echo 'header'.$i;?>">
     <h5 class="mb-0">
     	<div class="row">
@@ -42,6 +43,7 @@ if ($n1 > 0) {
 	        </a>
 	      </div>
 	      <div class="col-sm-2 message-buttons" style="text-align: right;">
+<?php if (!$send) { ?>
 			    <a href="#" onclick="MarkAsViewed(<?php echo $i;?>)" data-toggle="tooltip" title="<?php
 					    			if (!$v) echo 'Mark as viewed';
 					    			else echo 'Mark as not viewed';
@@ -54,6 +56,7 @@ if ($n1 > 0) {
 					  </span>
 					</a>
 	        <a href="#" data-toggle="tooltip" title="Reply"><span class="material-icons">reply</span></a>
+<?php } ?>
 	        <a href="#" onclick="DeleteMessage(<?php echo $i;?>)" data-toggle="tooltip" title="Delete"><span class="material-icons">delete_forever</span></a>
 	      </div>
 	   	</div>
