@@ -16,25 +16,37 @@ if (isset($_COOKIE['username'])) {
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $errors = array();
 
-    if (empty($_POST['destiny'])) $errors[] = 'You forgot to enter the destiny username.';
-    else {
-      if (strlen($_POST['destiny']) < 5) $errors[] = 'The destiny username is too short.';
-      else if (strlen($_POST['destiny']) > 10) $errors[] = 'The destiny username is too long.';
+    if (!isset($_GET['destiny_user'])) {
+      if (empty($_POST['destiny'])) $errors[] = 'You forgot to enter the destiny username.';
       else {
-        $destiny = mysqli_real_escape_string($dbc, trim($_POST['destiny']));
-        $q = "SELECT user_id FROM users WHERE username='$destiny'";
-        $r = @mysqli_query($dbc, $q);
-        $num = @mysqli_num_rows($r);
-        if ($num != 1) $errors[] = 'The username does not exist.';
+        if (strlen($_POST['destiny']) < 5) $errors[] = 'The destiny username is too short.';
+        else if (strlen($_POST['destiny']) > 10) $errors[] = 'The destiny username is too long.';
         else {
-          $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
-          $did = $row['user_id'];
+          $destiny = mysqli_real_escape_string($dbc, trim($_POST['destiny']));
+          $q = "SELECT user_id FROM users WHERE username='$destiny'";
+          $r = @mysqli_query($dbc, $q);
+          $num = @mysqli_num_rows($r);
+          if ($num != 1) $errors[] = 'The username does not exist.';
+          else {
+            $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+            $did = $row['user_id'];
+          }
         }
+      }
+    } else if (!empty($_GET['destiny_user'])){
+      $destiny = $_GET['destiny_user'];
+      $q = "SELECT user_id FROM users WHERE username='$destiny'";
+      $r = @mysqli_query($dbc, $q);
+      $num = @mysqli_num_rows($r);
+      if ($num != 1) $errors[] = 'The username does not exist.';
+      else {
+        $row = mysqli_fetch_array($r, MYSQLI_ASSOC);
+        $did = $row['user_id'];
       }
     }
     if (empty($_POST['title'])) $errors[] = 'You forgot to enter the title of the message.';
     else {
-      if (strlen($_POST['title']) < 5) $errors[] = 'The title is too short.';
+      if (strlen($_POST['title']) < 3) $errors[] = 'The title is too short.';
       else if (strlen($_POST['title']) > 50) $errors[] = 'The title is too long.';
       else $title = mysqli_real_escape_string($dbc, trim($_POST['title']));
     }
@@ -78,8 +90,8 @@ if (isset($_COOKIE['username'])) {
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="title">Title:</label>
         <div class="col-sm-10"> 
-          <input type="text" class="form-control" name="title" minlength="5" maxlength="50" required id="title" placeholder="Message title" value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>">
-          <small class="form-text text-muted">Required. This will be the title of your message. It must be between 5 and 50 characters.</small>
+          <input type="text" class="form-control" name="title" minlength="3" maxlength="50" required id="title" placeholder="Message title" value="<?php if (isset($_POST['title'])) echo $_POST['title']; ?>">
+          <small class="form-text text-muted">Required. This will be the title of your message. It must be between 3 and 50 characters.</small>
         </div>
       </div>
       <div class="form-group row">
@@ -92,7 +104,16 @@ if (isset($_COOKIE['username'])) {
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="destiny">Destiny:</label>
         <div class="col-sm-10"> 
-          <input type="text" class="form-control" minlength="5" maxlength="10" name="destiny" required id="destiny" placeholder="Destiny username" value="<?php if (isset($_POST['destiny'])) echo $_POST['destiny']; ?>">
+          <input type="text" class="form-control" minlength="5" maxlength="10" name="destiny" required id="destiny" placeholder="Destiny username"
+          value="<?php
+            if (isset($_GET['destiny_user'])) echo $_GET['destiny_user'];
+            else if (isset($_POST['destiny'])) echo $_POST['destiny'];
+          ?>"
+          <?php
+            if (!empty($_GET['destiny_user'])) { 
+              echo 'readonly="readonly"';
+            }
+          ?>>
           <small class="form-text text-muted">Required. This will be who will recieve the message. It must be a registered username.</small>
         </div>
       </div>

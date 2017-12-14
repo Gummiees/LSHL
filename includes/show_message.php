@@ -27,20 +27,24 @@ if ($n1 > 0) {
     <h5 class="mb-0">
     	<div class="row">
       	<div class="col-sm-10 messages-title">
-	        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#<?php echo 'collapse'.$i;?>" aria-expanded="false" aria-controls="<?php echo 'collapse'.$i;?>">
-	        	<div class="row">
-					    <div class="col-sm-3"><span><?php if (!$send) echo $oid; else echo 'To: '.$did;?></span></div>
+        	<div class="row">
+				    <div class="col-sm-3">
+				    	<a href="profile.php?username=<?php if (!$send) echo $oid; else echo $did;?>"><span><?php if (!$send) echo $oid; else echo 'To: '.$did;?></span></a>
+				    </div>
 					    <div class="col-sm-7 title-name">
-					    	<span>
-					    		<?php
-					    			if (!$v) echo '<b>'.$t.'</b>';
-					    			else echo $t;
-					    		?>
-				    		</span>
+					    	<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#<?php echo 'collapse'.$i;?>" aria-expanded="false" aria-controls="<?php echo 'collapse'.$i;?>">
+					    		<span>
+						    		<?php
+						    			if (!$v) echo '<b>'.$t.'</b>';
+						    			else echo $t;
+						    		?>
+				    			</span>
+	        			</a>
 				    	</div>
-					    <div class="col-sm-2"><span class="badge"><?php echo date('H:i d/m/y', strtotime($date));?></span></div>
-				  	</div>
-	        </a>
+					    <div class="col-sm-2">
+					    	<span class="badge"><?php echo date('H:i d/m/y', strtotime($date));?></span>
+					    </div>
+			  	</div>
 	      </div>
 	      <div class="col-sm-2 message-buttons" style="text-align: right;">
 <?php if (!$send) { ?>
@@ -55,7 +59,7 @@ if ($n1 > 0) {
 			    		?>
 					  </span>
 					</a>
-	        <a href="#" data-toggle="tooltip" title="Reply"><span class="material-icons">reply</span></a>
+	        <a href="new_message.php?destiny_user=<?php echo $oid;?>" data-toggle="tooltip" title="Reply"><span class="material-icons">reply</span></a>
 <?php } ?>
 	        <a href="#" onclick="DeleteMessage(<?php echo $i;?>)" data-toggle="tooltip" title="Delete"><span class="material-icons">delete_forever</span></a>
 	      </div>

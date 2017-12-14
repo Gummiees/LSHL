@@ -2,6 +2,7 @@
 include('includes/print_messages.php');
 require ('mysqli_connect.php');
 include ('includes/header.php');
+require ('includes/login_function.php');
 
 if (isset($_COOKIE['username'])) {
   $uid = $_COOKIE['username'];
@@ -15,7 +16,6 @@ if (isset($_COOKIE['username'])) {
 	$id = $row['user_id'];
 
   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    var_dump($_POST['action']);
     if (!empty($_POST['message_id']) && $_POST['action'] == "viewed") {
       $mid = $_POST['message_id'];
       $q = "UPDATE messages SET viewed=1 WHERE message_id=$mid AND viewed=0";
@@ -24,11 +24,20 @@ if (isset($_COOKIE['username'])) {
         $q = "UPDATE messages SET viewed=0 WHERE message_id=$mid AND viewed=1";
         $r = @mysqli_query($dbc, $q);
       }
-    } else if (!empty($_POST['message_id']) && $_POST['action'] == "del"){
+    } else if (!empty($_POST['message_id']) && $_POST['action'] == "del") {
       $mid = $_POST['message_id'];
       $change = $_POST['change'];
       $q = "UPDATE messages SET $change=0, viewed=1 WHERE message_id=$mid";
       $r = @mysqli_query($dbc, $q);
+      if (mysqli_affected_rows($dbc) != 1) {
+        echo print_message('danger', 'The user could not be deleted due to a system error');
+        echo '<p>'.mysqli_error($dbc).'<br />Query: '.$q.'</p>';
+      }
+    } else if (!empty($_POST['message_id']) && $_POST['action'] == "answer") {
+      $mid = $_POST['message_id'];
+      $q = "UPDATE messages SET viewed=1 WHERE message_id=$mid";
+      $r = @mysqli_query($dbc, $q);
+      echo print_message('success', 'pito');
       if (mysqli_affected_rows($dbc) != 1) {
         echo print_message('danger', 'The user could not be deleted due to a system error');
         echo '<p>'.mysqli_error($dbc).'<br />Query: '.$q.'</p>';
