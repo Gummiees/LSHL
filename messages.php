@@ -40,7 +40,7 @@ if (isset($_COOKIE['username'])) {
   $send=0;
   $cont=0;
   //imprimir inbox
-  $q = "SELECT message_id, origin_id, title, description, viewed, view_destiny, date FROM messages WHERE destiny_id=$id";
+  $q = "SELECT message_id, origin_id, title, description, viewed, view_destiny, date FROM messages WHERE destiny_id=$id ORDER BY date DESC";
   $r = @mysqli_query($dbc, $q);
   $num = @mysqli_num_rows($r);
   include('includes/show_messages_top.php');
@@ -65,7 +65,7 @@ if (isset($_COOKIE['username'])) {
 
   $send=1;
   $cont=0;
-  $q = "SELECT message_id, destiny_id, title, description, viewed, view_origin, date FROM messages WHERE origin_id=$id";
+  $q = "SELECT message_id, destiny_id, title, description, viewed, view_origin, date FROM messages WHERE origin_id=$id ORDER BY date DESC";
   $r = @mysqli_query($dbc, $q);
   $num = @mysqli_num_rows($r);
   if ($num > 0) {
