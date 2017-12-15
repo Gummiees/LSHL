@@ -6,7 +6,7 @@ include ('includes/header.php');
 if (isset($_COOKIE['username'])) {
   $uid = $_COOKIE['username'];
   $pass = $_COOKIE['pass'];
-  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
+  $q = "SELECT user_id FROM users WHERE username='$uid' AND pass='$pass'";
   $r = @mysqli_query ($dbc, $q);
   $num = mysqli_num_rows($r);
   if ($num != 1) {

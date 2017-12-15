@@ -27,7 +27,7 @@ if (!isset($_COOKIE['username'])) {
     } else {
       if (5 > strlen($_POST['username'])) {
         $errors[] = 'Username is too short.';
-      }else if (20 < strlen($_POST['username'])) {
+      }else if (10 < strlen($_POST['username'])) {
         $errors[] = 'Username is too long.';
       } else {
         $usr = mysqli_real_escape_string($dbc, trim($_POST['username']));
@@ -140,7 +140,7 @@ if (!isset($_COOKIE['username'])) {
       <div class="form-group row">
         <label class="control-label col-sm-2 text-right" for="username">Username:</label>
         <div class="col-sm-10"> 
-          <input type="text" class="form-control" minlength="5" maxlength="20" name="username" id="username" required placeholder="Username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>">
+          <input type="text" class="form-control" minlength="5" maxlength="10" name="username" id="username" required placeholder="Username" value="<?php if (isset($_POST['username'])) echo $_POST['username']; ?>">
           <small class="form-text text-muted">Required. You won't be able to change it afterwards. It must be between 5 and 20 characters.</small>
         </div>
       </div>

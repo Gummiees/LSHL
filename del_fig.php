@@ -7,7 +7,7 @@ require ('includes/login_function.php');
 if (isset($_COOKIE['username'])) {
   $uid = $_COOKIE['username'];
   $pass = $_COOKIE['pass'];
-  $q = "SELECT COUNT(user_id) AS total FROM users WHERE username='$uid' OR pass='$pass'";
+  $q = "SELECT user_id FROM users WHERE username='$uid' AND pass='$pass'";
   $r = @mysqli_query ($dbc, $q);
   if (mysqli_num_rows($r) != 1) {
     redirect_user('logout.php?hacked=1');
@@ -54,5 +54,5 @@ if (isset($_COOKIE['username'])) {
 <script>$('#myModal').modal('show');</script>
 <?php  
   } else echo print_message('danger', 'You must choose a figure to delete.');
-} else echo print_message('danger', 'You must be logged in to delete a figure.');
+} 
 ?>

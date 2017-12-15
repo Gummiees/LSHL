@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2017 a las 16:12:51
+-- Tiempo de generación: 14-12-2017 a las 17:16:14
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -61,7 +61,8 @@ INSERT INTO `figures` (`figure_id`, `user_id`, `name`, `description`, `price`, `
 (29, 5, 'Furyu 6.3\" RWBY: Ruby Rose Special Figure', 'Officially Licensed by Furyu\r\nMinor Assembly Required\r\nLimited Quantity\r\nPerfect for RWBY Fans\r\nSize Approx: 2\"L x 2\"W x 6.3\"H', 34.52, 'https://images-na.ssl-images-amazon.com/images/I/81QL7mPAxTL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81wyW5fTpWL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81Inf-TEnxL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
 (30, 4, 'KonoSuba: Megumin', 'Officially Licensed by Sega\r\nNew and sealed inside retail packaging\r\nVery limited and collectible\r\nMinor assembly required\r\nApprox. Size: 5\"L x 4\"W x 7.8\"H', 42.95, 'https://images-na.ssl-images-amazon.com/images/I/818pavI3caL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/81GoG1jt3OL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/910V-ZyDCPL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
 (31, 3, 'Madoka Magica SQ 7\" Homura Akemi Figure', 'Officially Licensed Figure from Banpresto Japan\r\nMakes a great gift!\r\nMinor assembly required\r\nLimited Quantity\r\nApprox. Size: 3\"L x 3\"W x 7\"H', 20.99, 'https://images-na.ssl-images-amazon.com/images/I/71eNozGi5DL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71K9oVWnDXL._SL1500_.jpg,https://images-na.ssl-images-amazon.com/images/I/71MepwxmBsL._SL1500_.jpg', 1, '2017-11-29 00:00:00'),
-(32, 12, 'Date A Live Yoshino Figurine Brinquedos PVC', 'Name:Date A Live Figures\r\nCommodity material:PVC\r\nCondition:100% NEW\r\nSize:about  18cm', 28.3, 'https://ae01.alicdn.com/kf/HTB1AuJsJXXXXXcKaXXXq6xXFXXXo/Japan-Anime-Figure-Date-A-Live-Yoshino-Figurine-Brinquedos-PVC-Action-Figure-Juguetes-Collectible-Model-Doll.jpg,https://ae01.alicdn.com/kf/HTB1T7o5QFXXXXc5XpXXq6xXFXXXh/18cmSAINTGI-1pc-Anime-Cute-Nendoroid-4-Date-A-Live-Yoshino-PVC-Action-Figure-Model-Brinquedos-Tokisaki.jpg', 1, '2017-11-29 16:55:42');
+(32, 12, 'Date A Live Yoshino Figurine Brinquedos PVC', 'Name:Date A Live Figures\r\nCommodity material:PVC\r\nCondition:100% NEW\r\nSize:about  18cm', 28.3, 'https://ae01.alicdn.com/kf/HTB1AuJsJXXXXXcKaXXXq6xXFXXXo/Japan-Anime-Figure-Date-A-Live-Yoshino-Figurine-Brinquedos-PVC-Action-Figure-Juguetes-Collectible-Model-Doll.jpg,https://ae01.alicdn.com/kf/HTB1T7o5QFXXXXc5XpXXq6xXFXXXh/18cmSAINTGI-1pc-Anime-Cute-Nendoroid-4-Date-A-Live-Yoshino-PVC-Action-Figure-Model-Brinquedos-Tokisaki.jpg', 1, '2017-11-29 16:55:42'),
+(33, 12, 'Miguerukun', 'Migueltodojuntodosvecessolounavez se transforma en figura ahora y para siempre.', 420.69, 'https://lapupilainsomne.files.wordpress.com/2013/09/pedro_miguel-2.jpg,https://efectodroste.files.wordpress.com/2015/03/miguel-donoso.jpg,http://negratinta.com/wp-content/uploads/2016/05/DSC1010.jpg.pagespeed.ce.2ZTi-YXc7t.jpg', 1, '2017-12-13 19:38:18');
 
 -- --------------------------------------------------------
 
@@ -75,8 +76,25 @@ CREATE TABLE `messages` (
   `origin_id` mediumint(8) UNSIGNED NOT NULL,
   `destiny_id` mediumint(8) UNSIGNED NOT NULL,
   `title` varchar(50) NOT NULL,
-  `description` varchar(1000) NOT NULL
+  `description` varchar(1000) NOT NULL,
+  `viewed` tinyint(1) NOT NULL DEFAULT '0',
+  `view_destiny` tinyint(1) NOT NULL DEFAULT '1',
+  `view_origin` tinyint(1) NOT NULL DEFAULT '1',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `messages`
+--
+
+INSERT INTO `messages` (`message_id`, `origin_id`, `destiny_id`, `title`, `description`, `viewed`, `view_destiny`, `view_origin`, `date`) VALUES
+(4, 4, 12, 'Hey it\'s me, CodeGayAss', 'How are you my dear friend? Today I talk to you to know if everything is allright. Hope it\'s a yes. See you later fam.', 0, 1, 1, '2017-12-13 19:59:39'),
+(5, 10, 12, '1234567890123456789012345678901234567890123456789', '123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890', 1, 1, 1, '2017-12-13 19:59:39'),
+(6, 12, 3, 'Hello how are you my dear', 'asdadasdasdasdasdasassaasdasdas', 0, 1, 1, '2017-12-14 15:17:55'),
+(7, 12, 5, 'Message title', 'Message description', 1, 1, 0, '2017-12-14 15:53:36'),
+(8, 12, 13, 'MoguelMoguelMoguelMogu elMoguelMog', 'MoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguelMoguel', 1, 1, 1, '2017-12-14 15:55:45'),
+(9, 13, 12, 'hola', 'hola', 0, 1, 1, '2017-12-14 16:14:56'),
+(11, 12, 13, 'tonto', 'tonot', 0, 1, 1, '2017-12-14 16:43:19');
 
 -- --------------------------------------------------------
 
@@ -102,7 +120,8 @@ INSERT INTO `stars` (`star_id`, `buyer_id`, `seller_id`, `value`) VALUES
 (7, 13, 1, 4),
 (8, 3, 2, 5),
 (9, 3, 1, 5),
-(10, 3, 12, 3);
+(10, 3, 12, 3),
+(11, 12, 13, 1);
 
 -- --------------------------------------------------------
 
@@ -113,7 +132,7 @@ INSERT INTO `stars` (`star_id`, `buyer_id`, `seller_id`, `value`) VALUES
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `user_id` mediumint(8) UNSIGNED NOT NULL,
-  `username` varchar(20) NOT NULL,
+  `username` varchar(10) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(40) NOT NULL,
   `email` varchar(60) NOT NULL,
@@ -131,12 +150,12 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `username`, `first_name`, `last_name`, `email`, `telephone`, `pass`, `image`, `description`, `registration_date`) VALUES
 (1, 'jhon001', 'John', 'Lennon', 'john@beatles.com', '654375123', '2a50435b0f512f60988db719106a258fb7e338ff', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Hey there! I\'m using Love Second Hand Live!', '2017-11-24 18:35:44'),
 (2, 'paulXD', 'Paul', 'McCartney', 'paul@beatles.com', '748346784', '6ae16792c502a5b47da180ce8456e5ae7d65e262', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Hey there! I\'m using Love Second Hand Live!', '2017-11-24 18:35:44'),
-(3, 'saoisthebest', 'George', 'Harrison', 'george@beatles.com ', '123123123', '711383a59fda05336fd2ccf70c8059d1523eb41a', 'https://t3.ftcdn.net/jpg/01/18/01/98/500_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg', 'Plz', '2017-11-24 18:35:44'),
+(3, 'saois', 'George', 'Harrison', 'george@beatles.com ', '123123123', '711383a59fda05336fd2ccf70c8059d1523eb41a', 'https://t3.ftcdn.net/jpg/01/18/01/98/500_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg', 'Plz', '2017-11-24 18:35:44'),
 (4, 'CodeGayAss', 'Ringo', 'Starr', 'ringo@beatles.com', '768567890', '520f73691bcf89d508d923a2dbc8e6fa58efb522', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Hey there! I\'m using Love Second Hand Live!', '2017-11-24 18:35:44'),
 (5, 'pablito', 'Pablo', 'Motos', 'pablo_motos@yahoo.es', '654738291', 'pablito1', 'https://donbalonrosa.defensacentral.com/images/2017/09/07/1504799606.jpg', 'Hey que tal guapas ;)', '2017-11-28 00:00:00'),
 (10, 'morgan', 'Morgan', 'Suisa', 'morgan@dasuisa.cat', '420420420', '9706377a84ddf99fa147d587c02c6a684c7a3465', 'https://vignette.wikia.nocookie.net/creation/images/2/22/ANGRY_MARGE_BECH.jpg', 'NO TE PASES DE LISTO CON MIGO.', '2017-11-28 18:25:40'),
 (11, 'prueba', 'prueba', 'prueba', 'prueba@prueba.com', '000000000', 'prueba', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'Hey there! I\'m using Love Second Hand Live!', '2017-11-28 00:00:00'),
-(12, 'test1', 'test', 'test', 'test@test.com', '123123123', 'b444ac06613fc8d63795be9ad0beaf55011936ac', 'https://is5-ssl.mzstatic.com/image/thumb/Purple118/v4/7e/30/c8/7e30c857-99f6-ed48-c4c8-f1387d2b992e/source/1200x630bb.jpg', 'testing', '2017-11-28 20:22:29'),
+(12, 'test1', 'test', 'test', 'test@test.com', '123123123', 'b444ac06613fc8d63795be9ad0beaf55011936ac', 'http://www.berissociudad.com.ar/data/fotos2/345400715__lopez_muntaner.jpg', NULL, '2017-11-28 20:22:29'),
 (13, 'moguel', 'Moguel', 'Haspíros', 'moguel@chiribitas.com', '012012012', 'ab70c58329dedb2985fe9c3d8c9a78c870e0988f', 'https://suspills.files.wordpress.com/2013/01/fake-smile.jpg', 'Soy Moguel', '2017-11-30 17:15:18');
 
 --
@@ -182,19 +201,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `figures`
 --
 ALTER TABLE `figures`
-  MODIFY `figure_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `figure_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT de la tabla `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `message_id` mediumint(8) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `stars`
 --
 ALTER TABLE `stars`
-  MODIFY `star_id` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `star_id` mediumint(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
